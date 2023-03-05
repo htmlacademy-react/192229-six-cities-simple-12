@@ -1,8 +1,12 @@
 import MainPage from '../../pages/main-page/main-page';
 
-function App(): JSX.Element {
+type AppOfferProps = {
+  placesCount: number;
+};
+
+function App({placesCount} : AppOfferProps): JSX.Element {
   return (
-    <MainPage placesCount ={131}/>
+    <MainPage placesCount ={placesCount}/>
   );
 }
 
