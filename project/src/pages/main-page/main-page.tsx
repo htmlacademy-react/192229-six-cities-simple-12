@@ -5,7 +5,6 @@ type PlaceRentInformation = {
   placesCount: number;
 };
 
-
 function MainPage({placesCount} : PlaceRentInformation): JSX.Element {
   return (
     <body className="page page--gray page--main">
