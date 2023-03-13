@@ -21,7 +21,7 @@ function App({placesCount,offers} : AppOfferProps): JSX.Element {
       <Routes>
         <Route path='/' element={<Layuout />}>
           <Route index element={<MainPage placesCount ={placesCount} offers={offers}/>} />
-          <Route path={AppRoute.Property} element={<Property />} />
+          <Route path={AppRoute.Property} element={<Property offers={offers}/>} />
         </Route>
         <Route path={AppRoute.Login} element={<PrivateRoute authorizationStatus={AuthorizationStatus.Auth}><Login /></PrivateRoute>} />
         <Route path="*" element={<PageNotFound />}/>

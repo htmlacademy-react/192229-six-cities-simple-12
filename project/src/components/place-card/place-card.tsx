@@ -9,7 +9,7 @@ type PlaceCardProps = {
 }
 
 function PlaceCard(props: PlaceCardProps): JSX.Element {
-  const {offer,} = props;
+  const {offer} = props;
   const {isPremium, previewImage, price, type, title, id} = offer;
 
 
