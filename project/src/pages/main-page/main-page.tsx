@@ -1,11 +1,13 @@
-import PlaceCard from '../../components/place-card/place-card';
+import { PlacesList } from '../../components/places-list/places-list';
+import { Offer } from '../../types/offers-list';
 
 
 type PlaceRentInformation = {
   placesCount: number;
+  offers: Offer[];
 };
 
-function MainPage({placesCount} : PlaceRentInformation): JSX.Element {
+function MainPage({placesCount,offers} : PlaceRentInformation): JSX.Element {
   return (
 
     <main className="page__main page__main--index">
@@ -14,17 +16,17 @@ function MainPage({placesCount} : PlaceRentInformation): JSX.Element {
         <section className="locations container">
           <ul className="locations__list tabs__list">
             <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#">
+              <a className="locations__item-link tabs__item" href="#todo">
                 <span>Paris</span>
               </a>
             </li>
             <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#">
+              <a className="locations__item-link tabs__item" href="#todo">
                 <span>Cologne</span>
               </a>
             </li>
             <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#">
+              <a className="locations__item-link tabs__item" href="#todo">
                 <span>Brussels</span>
               </a>
             </li>
@@ -66,13 +68,7 @@ function MainPage({placesCount} : PlaceRentInformation): JSX.Element {
                 <li className="places__option" tabIndex={0}>Top rated first</li>
               </ul>
             </form>
-            <div className="cities__places-list places__list tabs__content">
-              <PlaceCard />
-              <PlaceCard />
-              <PlaceCard />
-              <PlaceCard />
-              <PlaceCard />
-            </div>
+            <PlacesList offerList={offers} />
           </section>
           <div className="cities__right-section">
             <section className="cities__map map"></section>
