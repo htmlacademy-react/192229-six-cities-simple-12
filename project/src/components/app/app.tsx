@@ -7,23 +7,23 @@ import Layuout from '../layout/layout';
 import PageNotFound from '../../pages/page-not-found/page-not-found';
 import ScrollToTop from '../../components/scroll-to-top/scroll-to-top';
 import PrivateRoute from '../private-route/private-route';
+import { Offer } from '../../types/offers-list';
 
 type AppOfferProps = {
   placesCount: number;
+  offers: Offer[];
 };
 
-function App({placesCount} : AppOfferProps): JSX.Element {
+function App({placesCount,offers} : AppOfferProps): JSX.Element {
   return (
     <BrowserRouter>
       <ScrollToTop />
       <Routes>
-        <Route path='/' element={<PrivateRoute authorizationStatus={AuthorizationStatus.Auth}><Layuout /></PrivateRoute>}>
-          <Route index element={<MainPage placesCount ={placesCount}/>} />
-          <Route path={AppRoute.Property} element={<Property />} />
+        <Route path='/' element={<Layuout />}>
+          <Route index element={<MainPage placesCount ={placesCount} offers={offers}/>} />
+          <Route path={AppRoute.Property} element={<Property offers={offers}/>} />
         </Route>
-
-        <Route path={AppRoute.Login} element={<Login />} />
-
+        <Route path={AppRoute.Login} element={<PrivateRoute authorizationStatus={AuthorizationStatus.Auth}><Login /></PrivateRoute>} />
         <Route path="*" element={<PageNotFound />}/>
       </Routes>
     </BrowserRouter>
