@@ -1,6 +1,10 @@
 import { PlacesList } from '../../components/places-list/places-list';
 import { Offer } from '../../types/offers-list';
 import { useState } from 'react';
+import { Map } from '../../components/map/map';
+import { pointMocks } from '../../mocks/points';
+import { cityMocks } from '../../mocks/city';
+
 
 type PlaceRentInformation = {
   placesCount: number;
@@ -72,7 +76,7 @@ function MainPage({placesCount,offers} : PlaceRentInformation): JSX.Element {
             <PlacesList offerList={offers} />
           </section>
           <div className="cities__right-section">
-            <section className="cities__map map"></section>
+            <Map city={cityMocks} points={pointMocks} />
           </div>
         </div>
       </div>
