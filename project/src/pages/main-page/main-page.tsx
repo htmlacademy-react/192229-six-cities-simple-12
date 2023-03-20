@@ -2,7 +2,7 @@ import { PlacesList } from '../../components/places-list/places-list';
 import { Offer } from '../../types/offers-list';
 import { useState } from 'react';
 import { Map } from '../../components/map/map';
-import { pointMocks } from '../../mocks/points';
+// import { pointMocks } from '../../mocks/points';
 import { cityMocks } from '../../mocks/city';
 
 
@@ -12,7 +12,19 @@ type PlaceRentInformation = {
 };
 
 function MainPage({placesCount,offers} : PlaceRentInformation): JSX.Element {
+
   const [isSortOpen, setSortState] = useState<boolean>(false);
+
+  const [selectedPoint, setSelectedPoint] = useState<number|null>(null);
+  // eslint-disable-next-line no-console
+  console.log(selectedPoint);
+  const offersAmsterdam = offers.filter((offer) => offer.city.name === 'Amsterdam');
+
+  const cardHoverHandler = (param: number | null) => {
+
+    setSelectedPoint(param);
+
+  };
   return (
 
     <main className="page__main page__main--index">
@@ -73,10 +85,10 @@ function MainPage({placesCount,offers} : PlaceRentInformation): JSX.Element {
                 <li className="places__option" tabIndex={0}>Top rated first</li>
               </ul>
             </form>
-            <PlacesList offerList={offers} />
+            <PlacesList offerList={offersAmsterdam} cardHoverHandler={cardHoverHandler} />
           </section>
           <div className="cities__right-section">
-            <Map city={cityMocks} points={pointMocks} />
+            <Map city={cityMocks} points={offersAmsterdam} activeCard={selectedPoint} />
           </div>
         </div>
       </div>
