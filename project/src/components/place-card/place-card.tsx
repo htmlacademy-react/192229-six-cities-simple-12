@@ -2,7 +2,6 @@ import { Offer } from '../../types/offers-list';
 import { Link } from 'react-router-dom';
 import { generatePath } from 'react-router-dom';
 import { AppRoute } from '../const';
-import {useEffect, useState} from 'react';
 
 type PlaceCardProps = {
   offer: Offer;
@@ -11,21 +10,13 @@ type PlaceCardProps = {
 }
 
 function PlaceCard(props: PlaceCardProps): JSX.Element {
-  const [activeCard, setActiveCard] = useState<number | null>(null);
+
   const {offer, activeCardId} = props;
   const {isPremium, previewImage, price, type, title, id} = offer;
-  const setCardId = () => {
-    setActiveCard(id);
-  };
-  const delCardId = () => {
-    setActiveCard(null);
-  };
-  useEffect(() => {
-    activeCardId(activeCard);
-  },[activeCard]);
+
 
   return (
-    <article className="cities__card place-card" onMouseEnter={setCardId} onMouseLeave={delCardId}>
+    <article className="cities__card place-card" onMouseEnter={ () => activeCardId(id) } onMouseLeave={() => activeCardId(null)}>
       {isPremium && <div className="place-card__mark"><span>Premium</span></div>}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <Link to={generatePath(AppRoute.Property, { id : String(id) })}>

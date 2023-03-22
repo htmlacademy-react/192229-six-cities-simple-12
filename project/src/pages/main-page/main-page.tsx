@@ -20,11 +20,7 @@ function MainPage({placesCount,offers} : PlaceRentInformation): JSX.Element {
   console.log(selectedPoint);
   const offersAmsterdam = offers.filter((offer) => offer.city.name === 'Amsterdam');
 
-  const cardHoverHandler = (param: number | null) => {
 
-    setSelectedPoint(param);
-
-  };
   return (
 
     <main className="page__main page__main--index">
@@ -85,7 +81,7 @@ function MainPage({placesCount,offers} : PlaceRentInformation): JSX.Element {
                 <li className="places__option" tabIndex={0}>Top rated first</li>
               </ul>
             </form>
-            <PlacesList offerList={offersAmsterdam} cardHoverHandler={cardHoverHandler} />
+            <PlacesList offerList={offersAmsterdam} cardHoverHandler={setSelectedPoint} />
           </section>
           <div className="cities__right-section">
             <Map city={cityMocks} points={offersAmsterdam} activeCard={selectedPoint} />
