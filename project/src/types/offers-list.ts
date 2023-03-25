@@ -47,3 +47,17 @@ export type Point = {
     lng: number;
   };
 
+export type Review = {
+    id: number;
+    user: RviewUser;
+    rating: number;
+    comment: string;
+    date: string;
+};
+
+export type RviewUser = {
+    id: number;
+    isPro: boolean;
+    name: string;
+    avatarUrl: string;
+};

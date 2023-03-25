@@ -16,8 +16,7 @@ function MainPage({placesCount,offers} : PlaceRentInformation): JSX.Element {
   const [isSortOpen, setSortState] = useState<boolean>(false);
 
   const [selectedPoint, setSelectedPoint] = useState<number|null>(null);
-  // eslint-disable-next-line no-console
-  console.log(selectedPoint);
+
   const offersAmsterdam = offers.filter((offer) => offer.city.name === 'Amsterdam');
 
 
@@ -84,7 +83,10 @@ function MainPage({placesCount,offers} : PlaceRentInformation): JSX.Element {
             <PlacesList offerList={offersAmsterdam} cardHoverHandler={setSelectedPoint} />
           </section>
           <div className="cities__right-section">
-            <Map city={cityMocks} points={offersAmsterdam} activeCard={selectedPoint} />
+            <section className="cities__map map">
+              <Map city={cityMocks} points={offersAmsterdam} activeCard={selectedPoint} height={'712px'} />
+            </section>
+
           </div>
         </div>
       </div>

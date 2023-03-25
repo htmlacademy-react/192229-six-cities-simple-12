@@ -5,3 +5,12 @@ export const cityMocks = {
   zoom: 12,
 
 };
+
+export const cityMocksParice = {
+  title: 'Parice',
+  lat: 48.85661,
+  lng: 2.351499,
+  zoom: 13,
+};
+
+

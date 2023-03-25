@@ -9,10 +9,11 @@ import 'leaflet/dist/leaflet.css';
 type MapLocationProps = {
   city: City;
   points: Offer[];
-  activeCard: number | null;
+  activeCard?: number | null;
+  height: string;
 };
 
-export function Map({city, points, activeCard}: MapLocationProps): JSX.Element {
+export function Map({city, points, activeCard = null, height = '794px'}: MapLocationProps): JSX.Element {
 
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
@@ -45,8 +46,8 @@ export function Map({city, points, activeCard}: MapLocationProps): JSX.Element {
   }, [map, points, activeCard]);
 
   return (
-    <section className="cities__map map" ref={mapRef}>
+    <div style={{height: height }} ref={mapRef}>
 
-    </section>
+    </div>
   );
 }
