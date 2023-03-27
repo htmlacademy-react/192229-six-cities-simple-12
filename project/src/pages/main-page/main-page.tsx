@@ -23,7 +23,6 @@ function MainPage({placesCount,offers} : PlaceRentInformation): JSX.Element {
 
 
   return (
-
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>
       <div className="tabs">
