@@ -61,3 +61,11 @@ export type RviewUser = {
     name: string;
     avatarUrl: string;
 };
+
+export type CityNavLink = {
+    id: number;
+    name: string;
+    isActive?: boolean;
+};
+
+export type CityId = number;

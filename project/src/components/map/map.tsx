@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { City, Offer } from '../../types/offers-list';
+import { OfferCity, Offer } from '../../types/offers-list';
 import { useMap } from '../../hooks/use-map/use-map';
 import L from 'leaflet';
 import { URL_MARKER_CURRENT, URL_MARKER_DEFAULT } from '../const';
@@ -7,7 +7,7 @@ import 'leaflet/dist/leaflet.css';
 
 
 type MapLocationProps = {
-  city: City;
+  city: OfferCity;
   points: Offer[];
   activeCard?: number | null;
   height: string;
