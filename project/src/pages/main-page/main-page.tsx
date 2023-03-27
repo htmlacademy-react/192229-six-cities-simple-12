@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { Map } from '../../components/map/map';
 // import { pointMocks } from '../../mocks/points';
 import { cityMocks } from '../../mocks/city';
+import { CITES } from '../../const';
+import { LocationList } from '../../components/location-list/location-list';
 
 
 type PlaceRentInformation = {
@@ -16,8 +18,7 @@ function MainPage({placesCount,offers} : PlaceRentInformation): JSX.Element {
   const [isSortOpen, setSortState] = useState<boolean>(false);
 
   const [selectedPoint, setSelectedPoint] = useState<number|null>(null);
-  // eslint-disable-next-line no-console
-  console.log(selectedPoint);
+
   const offersAmsterdam = offers.filter((offer) => offer.city.name === 'Amsterdam');
 
 
@@ -27,38 +28,7 @@ function MainPage({placesCount,offers} : PlaceRentInformation): JSX.Element {
       <h1 className="visually-hidden">Cities</h1>
       <div className="tabs">
         <section className="locations container">
-          <ul className="locations__list tabs__list">
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#todo">
-                <span>Paris</span>
-              </a>
-            </li>
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#todo">
-                <span>Cologne</span>
-              </a>
-            </li>
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#todo">
-                <span>Brussels</span>
-              </a>
-            </li>
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item tabs__item--active">
-                <span>Amsterdam</span>
-              </a>
-            </li>
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#">
-                <span>Hamburg</span>
-              </a>
-            </li>
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#">
-                <span>Dusseldorf</span>
-              </a>
-            </li>
-          </ul>
+          <LocationList cities={CITES} />
         </section>
       </div>
       <div className="cities">
@@ -84,7 +54,10 @@ function MainPage({placesCount,offers} : PlaceRentInformation): JSX.Element {
             <PlacesList offerList={offersAmsterdam} cardHoverHandler={setSelectedPoint} />
           </section>
           <div className="cities__right-section">
-            <Map city={cityMocks} points={offersAmsterdam} activeCard={selectedPoint} />
+            <section className="cities__map map">
+              <Map city={cityMocks} points={offersAmsterdam} activeCard={selectedPoint} height={'712px'} />
+            </section>
+
           </div>
         </div>
       </div>
