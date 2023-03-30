@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { OfferCity, Offer } from '../../types/offers-list';
+import { Offer, OfferCity } from '../../types/offers-list';
 import { useMap } from '../../hooks/use-map/use-map';
 import L from 'leaflet';
 import { URL_MARKER_CURRENT, URL_MARKER_DEFAULT } from '../const';
@@ -29,6 +29,15 @@ export function Map({city, points, activeCard = null, height = '794px'}: MapLoca
     iconSize: [27, 27],
     iconAnchor: [20, 40],
   });
+  useEffect(() => {
+    if (map) {
+      map.flyTo(
+        [city.location.latitude, city.location.longitude],
+        city.location.zoom,
+        { animate: true, duration: 2 }
+      );
+    }
+  }, [map, city]);
 
   useEffect(() => {
     if (map) {

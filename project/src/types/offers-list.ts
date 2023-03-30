@@ -1,3 +1,5 @@
+import {store} from '../store/index.js';
+
 export type OfferLocation = {
     latitude: number;
     longitude: number;
@@ -64,8 +66,16 @@ export type RviewUser = {
 
 export type CityNavLink = {
     id: number;
-    name: string;
-    isActive?: boolean;
+    city: OfferCity;
 };
 
+export type CityState = {
+    id: number;
+    city: OfferCity;
+  }
+
 export type CityId = number;
+
+export type State = ReturnType<typeof store.getState>;
+
+export type AppDispatch = typeof store.dispatch;

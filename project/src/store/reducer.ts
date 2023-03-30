@@ -1,17 +1,28 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { changeActiveCity } from './action';
+import { CityState, Offer } from '../types/offers-list';
+import { changeActiveCity, setCityOffers } from './action';
+import { offers } from '../mocks/offers';
 
 
-const initialState = {
-  activeCityId : 1,
-  newCityId : 1
+const initialState : {activeCity : CityState; offers: Offer[]} = {
+  activeCity : { id: 1, city: {
+    'name': 'Paris',
+    'location': {
+      'latitude': 48.85661,
+      'longitude': 2.351499,
+      'zoom': 13
+    }
+  }},
+  offers : offers,
 };
 
 const reducer = createReducer(initialState, (builder) => {
   builder
     .addCase(changeActiveCity, (state, action) => {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-      state.activeCityId = action.payload;
+      state.activeCity = action.payload.activeCity;
+    })
+    .addCase(setCityOffers, (state) => {
+      state.offers = offers;
     });
 });
 
