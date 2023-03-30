@@ -5,7 +5,7 @@ import { ReviewsList } from '../../components/reviews-list/reviews-list';
 import { reviews } from '../../mocks/review';
 import { nearPlaces } from '../../mocks/near-places';
 import { NearPlacesList } from '../../components/near-places-list/near-places-list';
-import { cityMocksParice } from '../../mocks/city';
+// import { cityMocksParice } from '../../mocks/city';
 import { Map } from '../../components/map/map';
 
 type RoomOffers = {
@@ -103,7 +103,7 @@ function Property(prop: RoomOffers) : JSX.Element {
           </div>
         </div>
         <section className="property__map map">
-          <Map city={cityMocksParice} points={nearPlaces} height={'579px'}/>
+          <Map city={nearPlaces[0].city} points={nearPlaces} height={'579px'}/>
         </section>
       </section>
       <div className="container">

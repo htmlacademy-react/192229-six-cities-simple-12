@@ -1,25 +1,23 @@
 import { PlacesList } from '../../components/places-list/places-list';
-import { Offer } from '../../types/offers-list';
+// import { Offer } from '../../types/offers-list';
 import { useState } from 'react';
 import { Map } from '../../components/map/map';
 // import { pointMocks } from '../../mocks/points';
-import { cityMocks } from '../../mocks/city';
-import { CITES } from '../../const';
+// import { cityMocks } from '../../mocks/city';
+import { CITES_OBJ } from '../../const';
 import { LocationList } from '../../components/location-list/location-list';
+import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
 
 
-type PlaceRentInformation = {
-  placesCount: number;
-  offers: Offer[];
-};
-
-function MainPage({placesCount,offers} : PlaceRentInformation): JSX.Element {
+function MainPage(): JSX.Element {
 
   const [isSortOpen, setSortState] = useState<boolean>(false);
-
   const [selectedPoint, setSelectedPoint] = useState<number|null>(null);
 
-  const offersAmsterdam = offers.filter((offer) => offer.city.name === 'Amsterdam');
+  const offers = useAppSelector((state) => state.offers);
+  const currentCity = useAppSelector((state) => state.activeCity);
+
+  const currentCityOffers = offers.filter((offer) => offer.city.name === currentCity.city.name);
 
 
   return (
@@ -27,14 +25,14 @@ function MainPage({placesCount,offers} : PlaceRentInformation): JSX.Element {
       <h1 className="visually-hidden">Cities</h1>
       <div className="tabs">
         <section className="locations container">
-          <LocationList cities={CITES} />
+          <LocationList cities={CITES_OBJ} />
         </section>
       </div>
       <div className="cities">
         <div className="cities__places-container container">
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
-            <b className="places__found">{placesCount} places to stay in Amsterdam</b>
+            <b className="places__found">{currentCityOffers.length} places to stay in {currentCity.city.name}</b>
             <form className="places__sorting" action="#" method="get">
               <span className="places__sorting-caption">Sort by</span>
               <span className="places__sorting-type" tabIndex={0} onClick={()=>setSortState(!isSortOpen)}>
@@ -50,11 +48,11 @@ function MainPage({placesCount,offers} : PlaceRentInformation): JSX.Element {
                 <li className="places__option" tabIndex={0}>Top rated first</li>
               </ul>
             </form>
-            <PlacesList offerList={offersAmsterdam} cardHoverHandler={setSelectedPoint} />
+            <PlacesList offerList={currentCityOffers} cardHoverHandler={setSelectedPoint} />
           </section>
           <div className="cities__right-section">
             <section className="cities__map map">
-              <Map city={cityMocks} points={offersAmsterdam} activeCard={selectedPoint} height={'712px'} />
+              <Map city={currentCity.city} points={currentCityOffers} activeCard={selectedPoint} height={'712px'} />
             </section>
 
           </div>

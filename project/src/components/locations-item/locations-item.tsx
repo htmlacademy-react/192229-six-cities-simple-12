@@ -1,19 +1,23 @@
-import { useState } from 'react';
-//import { Link } from 'react-router-dom';
+import { useAppDispatch } from '../../hooks/use-app-dispatch/use-app-dispatch';
+import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
+import { changeActiveCity } from '../../store/action';
+import { OfferCity } from '../../types/offers-list';
+
 
 type LocationsItemProp = {
-    name: string;
-    isActive?: boolean;
+    city: OfferCity;
+    id: number;
 }
 
-export function LocationsItem ({name,isActive = false} : LocationsItemProp) : JSX.Element {
-  const [activeCity, setActiveCity] = useState<boolean>(isActive);
-
+export function LocationsItem ({city, id} : LocationsItemProp) : JSX.Element {
+  // const [activeCity, setActiveCity] = useState<boolean>(isActive);
+  const isActive = id === useAppSelector((state) => state.activeCity.id);
+  const dispatch = useAppDispatch();
 
   return (
     <li className="locations__item">
-      <a onClick={(e) => {setActiveCity(!activeCity); }} className={`locations__item-link tabs__item ${activeCity ? 'tabs__item--active' : ''}`} href={`#${name}`}>
-        <span>{name}</span>
+      <a onClick={() => dispatch(changeActiveCity({id,city}))} className={`locations__item-link tabs__item ${isActive ? 'tabs__item--active' : ''}`} href={`#${city.name}`}>
+        <span>{city.name}</span>
       </a>
     </li>
   );
