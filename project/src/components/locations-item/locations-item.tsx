@@ -10,7 +10,7 @@ type LocationsItemProp = {
 }
 
 export function LocationsItem ({city, id} : LocationsItemProp) : JSX.Element {
-  // const [activeCity, setActiveCity] = useState<boolean>(isActive);
+
   const isActive = id === useAppSelector((state) => state.activeCity.id);
   const dispatch = useAppDispatch();
 

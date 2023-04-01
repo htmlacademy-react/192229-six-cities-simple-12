@@ -3,11 +3,10 @@ import PlaceCard from '../place-card/place-card';
 
 type PlaceOfferListProps = {
   offerList: Offer[];
-  cardHoverHandler: ( param :number|null)=> void;
 
 };
 
-export function PlacesList({offerList,cardHoverHandler} : PlaceOfferListProps) : JSX.Element {
+export function PlacesList({offerList} : PlaceOfferListProps) : JSX.Element {
 
 
   return (
@@ -15,7 +14,7 @@ export function PlacesList({offerList,cardHoverHandler} : PlaceOfferListProps) :
       {offerList.map((offer)=>{
         const keyValue = offer.id;
         return (
-          <PlaceCard key={keyValue} offer={offer} activeCardId={cardHoverHandler} />
+          <PlaceCard key={keyValue} offer={offer} />
         );
       })}
     </div>

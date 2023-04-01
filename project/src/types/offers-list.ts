@@ -72,10 +72,25 @@ export type CityNavLink = {
 export type CityState = {
     id: number;
     city: OfferCity;
-  }
+};
+
+export type RoomState = {
+    id: number | null;
+}
 
 export type CityId = number;
 
 export type State = ReturnType<typeof store.getState>;
 
 export type AppDispatch = typeof store.dispatch;
+
+export type OffersFilterOptionProp = {
+    tabIndex: number;
+    name: string;
+};
+
+export type FilterParams = {
+    cityName: string;
+    filterOtion: string;
+     offers: Offer[];
+};
