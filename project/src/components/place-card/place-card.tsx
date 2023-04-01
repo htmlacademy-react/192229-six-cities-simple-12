@@ -2,21 +2,23 @@ import { Offer } from '../../types/offers-list';
 import { Link } from 'react-router-dom';
 import { generatePath } from 'react-router-dom';
 import { AppRoute } from '../const';
+import { useAppDispatch } from '../../hooks/use-app-dispatch/use-app-dispatch';
+import { changeActiveRoom } from '../../store/action';
 
 type PlaceCardProps = {
   offer: Offer;
-  activeCardId: ( param :number|null)=> void;
 
 }
 
 function PlaceCard(props: PlaceCardProps): JSX.Element {
 
-  const {offer, activeCardId} = props;
-  const {isPremium, previewImage, price, type, title, id} = offer;
+
+  const {isPremium, previewImage, price, type, title, id} = props.offer;
+  const dispatch = useAppDispatch();
 
 
   return (
-    <article className="cities__card place-card" onMouseEnter={ () => activeCardId(id) } onMouseLeave={() => activeCardId(null)}>
+    <article className="cities__card place-card" onMouseEnter={ () => dispatch(changeActiveRoom({id: id})) } onMouseLeave={() => dispatch(changeActiveRoom({id: null}))}>
       {isPremium && <div className="place-card__mark"><span>Premium</span></div>}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <Link to={generatePath(AppRoute.Property, { id : String(id) })}>
