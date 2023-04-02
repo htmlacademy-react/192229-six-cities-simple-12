@@ -7,14 +7,27 @@ import Layout from '../layout/layout';
 import PageNotFound from '../../pages/page-not-found/page-not-found';
 import ScrollToTop from '../../components/scroll-to-top/scroll-to-top';
 import PrivateRoute from '../private-route/private-route';
-import { Offer } from '../../types/offers-list';
+// import { Offer } from '../../types/offers-list';
+import LoadingScreen from '../../pages/loading-screen/loading-screen';
+import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
+import { store } from '../../store';
+import { fetchOffersAction } from '../../store/api-actions';
 
-type AppOfferProps = {
-  placesCount: number;
-  offers: Offer[];
-};
 
-function App({placesCount,offers} : AppOfferProps): JSX.Element {
+store.dispatch(fetchOffersAction());
+// store.dispatch(checkAuthAction());
+
+function App(): JSX.Element {
+  // const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
+  const offers = useAppSelector((state) => state.offers);
+
+  // if (authorizationStatus === AuthorizationStatus.Unknown || isOffersDataLoading) {
+  if (isOffersDataLoading) {
+    return (
+      <LoadingScreen />
+    );
+  }
   return (
     <BrowserRouter>
       <ScrollToTop />

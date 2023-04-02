@@ -1,5 +1,5 @@
 import {createAction} from '@reduxjs/toolkit';
-import { CityState, OffersFilterOptionProp, RoomState } from '../types/offers-list';
+import { CityState, Offer, OffersFilterOptionProp, RoomState } from '../types/offers-list';
 
 export const changeActiveCity = createAction('city/changeActiveCity',
   (activeCity : CityState ) => ({
@@ -21,6 +21,10 @@ export const setOffersFilter = createAction('city/setOffersFilter',
 
 export const changeFilterIsOpen = createAction('city/changeFilterIsOpen');
 
-export const setCityOffers = createAction('city/setCityOffers');
+export const loadOffers = createAction<Offer[]>('data/loadOffers');
 
-// export const getOffersForCurrentCity = createAction('city/getOffersForCity');
+export const setOffersDataLoadingStatus = createAction<boolean>('data/setOffersDataLoadingStatus');
+
+
+// export const setCityOffers = createAction('city/setCityOffers');
+
