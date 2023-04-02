@@ -59,3 +59,10 @@ export const CITES_OBJ = [
     }
   }}
 ];
+
+export enum APIRoute {
+  Offers = '/hotels',
+  Offer = '/hotels/:id',
+  Login = '/login',
+  Logout = '/logout',
+}
