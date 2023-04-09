@@ -1,21 +1,24 @@
 import ReviewsForm from '../../components/reviews-form/reviews-form';
-import { Offer } from '../../types/offers-list';
-import { useParams } from 'react-router-dom';
+
+// import { useParams } from 'react-router-dom';
 import { ReviewsList } from '../../components/reviews-list/reviews-list';
 import { reviews } from '../../mocks/review';
 import { nearPlaces } from '../../mocks/near-places';
 import { NearPlacesList } from '../../components/near-places-list/near-places-list';
-// import { cityMocksParice } from '../../mocks/city';
+import { offer } from '../../mocks/offer';
 import { Map } from '../../components/map/map';
+// import { store } from '../../store';
+// import { fetchOfferAction } from '../../store/api-actions';
+import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
 
-type RoomOffers = {
-  offers: Offer[];
-}
 
-function Property(prop: RoomOffers) : JSX.Element {
-  const {id} = useParams();
-  const {offers} = prop;
-  const {isPremium, description, title, host, rating, price, goods, bedrooms, type, maxAdults} = offers[Number(id)];
+function Property() : JSX.Element {
+  // const {id} = useParams();
+  // store.dispatch(fetchOfferAction(String(id)));
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  // const offer = useAppSelector((state) => state.offer);
+
+  const {isPremium, description, title, host, rating, price, goods, bedrooms, type, maxAdults} = offer;
   const starsStyle = String(Math.floor(rating * 100 / 5));
   return (
     <main className="page__main page__main--property">
@@ -98,7 +101,7 @@ function Property(prop: RoomOffers) : JSX.Element {
             <section className="property__reviews reviews">
               <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
               <ReviewsList reviews={reviews}/>
-              <ReviewsForm />
+              {authorizationStatus === 'AUTH' && <ReviewsForm /> }
             </section>
           </div>
         </div>
