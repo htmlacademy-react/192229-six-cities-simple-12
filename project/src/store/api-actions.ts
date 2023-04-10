@@ -45,7 +45,8 @@ export const fetchOfferAction = createAsyncThunk<void, string, {
     // eslint-disable-next-line no-console
     console.log(`${APIRoute.Offers}/${_arg}`);
 
-    const {data} = await api.get<Offer>(`${APIRoute.Offers}/${_arg}`);
+    const {data} = await api.get<Offer>(`/hotels/${_arg}`);
+
     dispatch(setOfferDataLoadingStatus(false));
     dispatch(loadOffer(data));
   },

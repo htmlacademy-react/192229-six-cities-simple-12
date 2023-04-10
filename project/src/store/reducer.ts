@@ -1,7 +1,7 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { CityState, Offer, OffersFilterOptionProp, RoomState } from '../types/offers-list';
 import { changeActiveCity, changeActiveRoom, changeFilterIsOpen, loadOffer, loadOffers, requireAuthorization, setError, setOffersDataLoadingStatus, setOffersFilter, setUserData, unsetUserData } from './action';
-import { offers } from '../mocks/offers';
+// import { offers } from '../mocks/offers';
 import { AuthorizationStatus } from '../components/const';
 import { UserData } from '../types/user-data';
 import { offer } from '../mocks/offer';
@@ -28,7 +28,7 @@ const initialState : {
            }
          }},
          activeRoom: {id: null},
-         offers : offers,
+         offers : [],
          offer : offer,
          selectedOption : {
            tabIndex: 0,
