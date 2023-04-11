@@ -1,6 +1,6 @@
 import ReviewsForm from '../../components/reviews-form/reviews-form';
 
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { ReviewsList } from '../../components/reviews-list/reviews-list';
 import { reviews } from '../../mocks/review';
 import { nearPlaces } from '../../mocks/near-places';
@@ -10,26 +10,34 @@ import { Map } from '../../components/map/map';
 import { store } from '../../store';
 import { fetchOfferAction } from '../../store/api-actions';
 import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
-import LoadingScreen from '../loading-screen/loading-screen';
+
+import { useEffect } from 'react';
+// import { offer as ofer } from '../../mocks/offer';
 
 
 function Property() : JSX.Element {
   const {id} = useParams();
-
-  store.dispatch(fetchOfferAction(String(id)));
-
+  const navigate = useNavigate();
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const offer = useAppSelector((state) => state.offer);
+
+  useEffect(() => {
+    ( async ()=> {
+      const data = await store.dispatch(fetchOfferAction(String(id)));
+
+      if(!data.payload) {
+        navigate('/not-found');
+      }
+
+    })();
+
+
+  },[id, navigate]);
+
 
   const {isPremium, description, title, host, rating, price, goods, bedrooms, type, maxAdults} = offer;
   const starsStyle = String(Math.floor(rating * 100 / 5));
 
-  const isOfferDataLoading = useAppSelector((state) => state.isOfferDataLoading);
-  if (isOfferDataLoading) {
-    return (
-      <LoadingScreen />
-    );
-  }
 
   return (
     <main className="page__main page__main--property">

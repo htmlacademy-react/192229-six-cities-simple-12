@@ -40,7 +40,7 @@ function PlaceCard(props: PlaceCardProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#todo">{title}</a>
+          <Link to={generatePath(AppRoute.Property, { id : String(id) })}>{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>

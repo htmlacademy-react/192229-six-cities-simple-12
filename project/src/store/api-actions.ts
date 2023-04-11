@@ -1,6 +1,6 @@
 import {AxiosInstance} from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import {loadOffer, loadOffers, redirectToRoute, requireAuthorization, setError, setOfferDataLoadingStatus, setOffersDataLoadingStatus, setUserData, unsetUserData} from './action';
+import {loadOffer, loadOffers, redirectToRoute, requireAuthorization, setError, setOffersDataLoadingStatus, setUserData, unsetUserData} from './action';
 import {APIRoute, TIMEOUT_SHOW_ERROR} from '../const';
 import { AppDispatch, Offer, State } from '../types/offers-list';
 import { store } from '.';
@@ -29,26 +29,30 @@ export const fetchOffersAction = createAsyncThunk<void, undefined, {
   async (_arg, {dispatch, extra: api}) => {
     dispatch(setOffersDataLoadingStatus(true));
     const {data} = await api.get<Offer[]>(APIRoute.Offers);
-    dispatch(setOffersDataLoadingStatus(false));
+
     dispatch(loadOffers(data));
+    dispatch(setOffersDataLoadingStatus(false));
   },
 );
 
-export const fetchOfferAction = createAsyncThunk<void, string, {
+export const fetchOfferAction = createAsyncThunk<Offer, string, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }> (
   'data/fetchOffer',
   async (_arg, {dispatch, extra: api}) => {
-    dispatch(setOfferDataLoadingStatus(true));
-    // eslint-disable-next-line no-console
-    console.log(`${APIRoute.Offers}/${_arg}`);
+    // dispatch(setOfferDataLoadingStatus(true));
+
 
     const {data} = await api.get<Offer>(`/hotels/${_arg}`);
+    // eslint-disable-next-line no-console
+    // console.log(data);
 
-    dispatch(setOfferDataLoadingStatus(false));
     dispatch(loadOffer(data));
+    // dispatch(setOfferDataLoadingStatus(false));
+    return data;
+
   },
 );
 
