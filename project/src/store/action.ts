@@ -1,5 +1,5 @@
 import {createAction} from '@reduxjs/toolkit';
-import { CityState, Offer, OffersFilterOptionProp, RoomState } from '../types/offers-list';
+import { CityState, Offer, OffersFilterOptionProp, RoomComment, RoomReview, RoomState } from '../types/offers-list';
 import { AppRoute, AuthorizationStatus } from '../components/const';
 import { UserData } from '../types/user-data';
 
@@ -25,9 +25,13 @@ export const changeFilterIsOpen = createAction('city/changeFilterIsOpen');
 
 export const loadOffers = createAction<Offer[]>('data/loadOffers');
 export const loadOffer = createAction<Offer>('data/loadOffer');
+export const loadNearPlaces = createAction<Offer[]>('data/loadNearPlaces');
+export const loadComments = createAction<RoomComment[]>('data/loadComments');
+
 
 export const setOffersDataLoadingStatus = createAction<boolean>('data/setOffersDataLoadingStatus');
 export const setOfferDataLoadingStatus = createAction<boolean>('data/setOffersDataLoadingStatus');
+export const setRoomReview = createAction<RoomReview>('form/setRoomReview');
 
 export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
 export const setError = createAction<string | null>('game/setError');

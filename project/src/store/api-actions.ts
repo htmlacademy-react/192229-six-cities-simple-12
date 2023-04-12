@@ -1,8 +1,8 @@
 import {AxiosInstance} from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import {loadOffer, loadOffers, redirectToRoute, requireAuthorization, setError, setOffersDataLoadingStatus, setUserData, unsetUserData} from './action';
+import {loadComments, loadNearPlaces, loadOffer, loadOffers, redirectToRoute, requireAuthorization, setError, setOffersDataLoadingStatus, setUserData, unsetUserData} from './action';
 import {APIRoute, TIMEOUT_SHOW_ERROR} from '../const';
-import { AppDispatch, Offer, State } from '../types/offers-list';
+import { AppDispatch, Offer, RoomComment, RoomReview, State } from '../types/offers-list';
 import { store } from '.';
 import { AppRoute, AuthorizationStatus } from '../components/const';
 import { saveToken, dropToken } from '../services/token';
@@ -35,6 +35,22 @@ export const fetchOffersAction = createAsyncThunk<void, undefined, {
   },
 );
 
+export const fetchNearOffersAction = createAsyncThunk<void, string, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}> (
+  'data/fetchNearOffers',
+  async (_arg, {dispatch, extra: api}) => {
+
+    const {data} = await api.get<Offer[]>(`/hotels/${_arg}/nearby`);
+    // eslint-disable-next-line no-console
+    console.log('Предложения->',data);
+    dispatch(loadNearPlaces(data));
+
+  },
+);
+
 export const fetchOfferAction = createAsyncThunk<Offer, string, {
   dispatch: AppDispatch;
   state: State;
@@ -52,6 +68,27 @@ export const fetchOfferAction = createAsyncThunk<Offer, string, {
     dispatch(loadOffer(data));
     // dispatch(setOfferDataLoadingStatus(false));
     return data;
+
+  },
+);
+
+export const fetchCommentsAction = createAsyncThunk<void, string, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}> (
+  'data/fetchComments',
+  async (_arg, {dispatch, extra: api}) => {
+    // dispatch(setOfferDataLoadingStatus(true));
+
+
+    const {data} = await api.get<RoomComment[]>(`/comments/${_arg}`);
+    // eslint-disable-next-line no-console
+    // console.log(data);
+
+    dispatch(loadComments(data));
+    // dispatch(setOfferDataLoadingStatus(false));
+
 
   },
 );
@@ -78,6 +115,23 @@ export const checkAuthAction = createAsyncThunk<void, undefined, {
       }
     },
   );
+
+export const addComment = createAsyncThunk<void, RoomReview, {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+  }>(
+    'form/addComment',
+    async ({rating, review}, {dispatch, extra: api}) => {
+      await api.post<RoomComment>(APIRoute.Login, {rating, review});
+      // eslint-disable-next-line no-console
+      // console.log('login',data);
+      // saveToken(token);
+      // dispatch(requireAuthorization(AuthorizationStatus.Auth));
+      //dispatch(setUserData(data));
+    },
+  );
+
 
 export const loginAction = createAsyncThunk<void, AuthData, {
     dispatch: AppDispatch;

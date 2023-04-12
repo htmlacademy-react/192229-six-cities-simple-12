@@ -1,17 +1,20 @@
-import { useState } from 'react';
 import { ChangeEvent } from 'react';
+import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
+import { useAppDispatch } from '../../hooks/use-app-dispatch/use-app-dispatch';
+import { setRoomReview } from '../../store/action';
 
 function ReviewsForm() : JSX.Element {
-  const [formData, setFormData] = useState({
-    rating: '',
-    review: '',
-  });
+
+  const dispatch = useAppDispatch();
+  const formData = useAppSelector((state) => state.roomReview);
 
   const fieldChangeHandle = (evt : ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) : void => {
     const {name, value} = evt.target;
 
-    setFormData({...formData, [name]: value});
+    dispatch(setRoomReview({...formData, [name]: value}));
   };
+
+
   // eslint-disable-next-line no-console
   console.log(formData);
 

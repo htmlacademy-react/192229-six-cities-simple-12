@@ -94,3 +94,22 @@ export type FilterParams = {
     filterOtion: string;
      offers: Offer[];
 };
+
+export type RoomReview = {
+    rating: string;
+    review: string;
+};
+
+export type RoomComment = {
+    comment: string;
+    date: string;
+    id: number;
+    rating: number;
+    user: {
+      avatarUrl: string;
+      id: number;
+      isPro: boolean;
+      name: string;
+    };
+};
+
