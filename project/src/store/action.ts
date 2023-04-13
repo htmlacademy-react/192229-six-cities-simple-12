@@ -28,6 +28,8 @@ export const loadOffer = createAction<Offer>('data/loadOffer');
 export const loadNearPlaces = createAction<Offer[]>('data/loadNearPlaces');
 export const loadComments = createAction<RoomComment[]>('data/loadComments');
 
+export const validateCommentForm = createAction<RoomReview>('form/validateCommentForm');
+
 
 export const setOffersDataLoadingStatus = createAction<boolean>('data/setOffersDataLoadingStatus');
 export const setOfferDataLoadingStatus = createAction<boolean>('data/setOffersDataLoadingStatus');

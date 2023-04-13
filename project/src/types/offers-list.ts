@@ -98,6 +98,7 @@ export type FilterParams = {
 export type RoomReview = {
     rating: string;
     review: string;
+    hotelId: string;
 };
 
 export type RoomComment = {

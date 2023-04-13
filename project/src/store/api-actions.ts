@@ -93,6 +93,24 @@ export const fetchCommentsAction = createAsyncThunk<void, string, {
   },
 );
 
+export const addCommentAction = createAsyncThunk<void, RoomReview, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'form/addComment',
+  async ({rating, review, hotelId}, {dispatch, extra: api}) => {
+
+    const {data} = await api.post<RoomComment[]>(`/comments/${hotelId}`, {'rating':rating, 'comment':review});
+    // eslint-disable-next-line no-console
+    console.log('form/addComment',data);
+    // saveToken(token);
+    // dispatch(requireAuthorization(AuthorizationStatus.Auth));
+    dispatch(loadComments(data));
+
+  },
+);
+
 export const checkAuthAction = createAsyncThunk<void, undefined, {
     dispatch: AppDispatch;
     state: State;
@@ -101,34 +119,13 @@ export const checkAuthAction = createAsyncThunk<void, undefined, {
     'user/checkAuth',
     async (_arg, {dispatch, extra: api}) => {
       try {
-        // eslint-disable-next-line no-console
-        console.log('Check auth req await 1');
         const {data} = await api.get<UserData>(APIRoute.Login);
-        // eslint-disable-next-line no-console
-        console.log('Check auth req await 2', data);
         dispatch(requireAuthorization(AuthorizationStatus.Auth));
         dispatch(setUserData(data));
       } catch {
-        // eslint-disable-next-line no-console
-        console.log('Check auth req catch');
+
         dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
       }
-    },
-  );
-
-export const addComment = createAsyncThunk<void, RoomReview, {
-    dispatch: AppDispatch;
-    state: State;
-    extra: AxiosInstance;
-  }>(
-    'form/addComment',
-    async ({rating, review}, {dispatch, extra: api}) => {
-      await api.post<RoomComment>(APIRoute.Login, {rating, review});
-      // eslint-disable-next-line no-console
-      // console.log('login',data);
-      // saveToken(token);
-      // dispatch(requireAuthorization(AuthorizationStatus.Auth));
-      //dispatch(setUserData(data));
     },
   );
 
@@ -141,8 +138,7 @@ export const loginAction = createAsyncThunk<void, AuthData, {
     'user/login',
     async ({login: email, password}, {dispatch, extra: api}) => {
       const {data, data: {token}} = await api.post<UserData>(APIRoute.Login, {email, password});
-      // eslint-disable-next-line no-console
-      console.log('login',data);
+
       saveToken(token);
       dispatch(requireAuthorization(AuthorizationStatus.Auth));
       dispatch(setUserData(data));

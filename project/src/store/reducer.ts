@@ -1,6 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { CityState, Offer, OffersFilterOptionProp, RoomComment, RoomReview, RoomState } from '../types/offers-list';
-import { changeActiveCity, changeActiveRoom, changeFilterIsOpen, loadComments, loadNearPlaces, loadOffer, loadOffers, requireAuthorization, setError, setOffersDataLoadingStatus, setOffersFilter, setRoomReview, setUserData, unsetUserData } from './action';
+import { changeActiveCity, changeActiveRoom, changeFilterIsOpen, loadComments, loadNearPlaces, loadOffer, loadOffers, requireAuthorization, setError, setOffersDataLoadingStatus, setOffersFilter, setRoomReview, setUserData, unsetUserData, validateCommentForm } from './action';
 // import { offers } from '../mocks/offers';
 import { AuthorizationStatus } from '../components/const';
 import { UserData } from '../types/user-data';
@@ -21,6 +21,7 @@ type InitialState = {
   userData : UserData | null;
   roomReview: RoomReview;
   comments: RoomComment[];
+  isFormValid: boolean;
   nearPlaces: Offer[];
 }
 
@@ -50,8 +51,10 @@ const initialState : InitialState = {
   roomReview: {
     rating: '',
     review: '',
+    hotelId: ''
   },
   comments: [],
+  isFormValid: false,
   nearPlaces: []
 };
 
@@ -80,6 +83,12 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(loadComments, (state, action) => {
       state.comments = action.payload;
+    })
+    .addCase(validateCommentForm, (state,action) => {
+      if(state.roomReview.rating !== '' && (state.roomReview.review.length >= 50 && state.roomReview.review.length <= 300 )) {
+        state.isFormValid = true;
+      }
+      else { state.isFormValid = false; }
     })
     .addCase(loadNearPlaces, (state, action) => {
       state.nearPlaces = action.payload;

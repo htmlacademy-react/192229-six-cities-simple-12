@@ -1,25 +1,41 @@
-import { ChangeEvent } from 'react';
+import { ChangeEvent, useEffect } from 'react';
 import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
 import { useAppDispatch } from '../../hooks/use-app-dispatch/use-app-dispatch';
-import { setRoomReview } from '../../store/action';
+import { setRoomReview, validateCommentForm } from '../../store/action';
+import { store } from '../../store';
+import { addCommentAction } from '../../store/api-actions';
+import { useParams } from 'react-router-dom';
 
 function ReviewsForm() : JSX.Element {
-
+  const {id} = useParams();
   const dispatch = useAppDispatch();
   const formData = useAppSelector((state) => state.roomReview);
+  const isFormValid = useAppSelector((state) => state.isFormValid);
 
   const fieldChangeHandle = (evt : ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) : void => {
     const {name, value} = evt.target;
 
-    dispatch(setRoomReview({...formData, [name]: value}));
+    dispatch(setRoomReview({...formData, [name]: value, hotelId: String(id)}));
+    dispatch(validateCommentForm(formData));
   };
+
+  useEffect(() => {
+    if(isFormValid) {
+      ( async ()=> {
+        await store.dispatch(addCommentAction(formData));
+      }
+      )();
+    }
+
+
+  },[formData, isFormValid]);
 
 
   // eslint-disable-next-line no-console
   console.log(formData);
 
   return (
-    <form className="reviews__form form" action="#" method="post">
+    <form className="reviews__form form" action="#" method="post" >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         <input onChange={fieldChangeHandle} checked={formData.rating === '5'} className="form__rating-input visually-hidden" name="rating" value="5" id="5-stars" type="radio"/>
@@ -62,7 +78,7 @@ function ReviewsForm() : JSX.Element {
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" disabled>Submit</button>
+        <button className="reviews__submit form__submit button" type="submit" disabled={!isFormValid} >Submit</button>
       </div>
     </form>
   );
