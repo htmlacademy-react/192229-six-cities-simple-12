@@ -1,9 +1,5 @@
 import { PlacesList } from '../../components/places-list/places-list';
-// import { Offer } from '../../types/offers-list';
-// import { useState } from 'react';
 import { Map } from '../../components/map/map';
-// import { pointMocks } from '../../mocks/points';
-// import { cityMocks } from '../../mocks/city';
 import { CITES_OBJ } from '../../const';
 import { LocationList } from '../../components/location-list/location-list';
 import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
