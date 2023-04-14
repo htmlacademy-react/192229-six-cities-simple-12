@@ -1,6 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { CityState, Offer, OffersFilterOptionProp, RoomComment, RoomReview, RoomState } from '../types/offers-list';
-import { changeActiveCity, changeActiveRoom, changeFilterIsOpen, loadComments, loadNearPlaces, loadOffer, loadOffers, requireAuthorization, setError, setOffersDataLoadingStatus, setOffersFilter, setRoomReview, setUserData, unsetUserData, validateCommentForm } from './action';
+import { changeActiveCity, changeActiveRoom, changeFilterIsOpen, loadComments, loadNearPlaces, loadOffer, loadOffers, requireAuthorization, resetReviewForm, setError, setFormSendingStatus, setOffersDataLoadingStatus, setOffersFilter, setRoomReview, setUserData, unsetUserData, validateCommentForm } from './action';
 // import { offers } from '../mocks/offers';
 import { AuthorizationStatus } from '../components/const';
 import { UserData } from '../types/user-data';
@@ -20,6 +20,7 @@ type InitialState = {
   error: string | null;
   userData : UserData | null;
   roomReview: RoomReview;
+  isSendingForm: boolean;
   comments: RoomComment[];
   isFormValid: boolean;
   nearPlaces: Offer[];
@@ -53,6 +54,7 @@ const initialState : InitialState = {
     review: '',
     hotelId: ''
   },
+  isSendingForm: false,
   comments: [],
   isFormValid: false,
   nearPlaces: []
@@ -84,6 +86,13 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(loadComments, (state, action) => {
       state.comments = action.payload;
     })
+    .addCase(resetReviewForm, (state) => {
+      state.roomReview = {
+        rating: '',
+        review: '',
+        hotelId: ''
+      };
+    })
     .addCase(validateCommentForm, (state,action) => {
       if(state.roomReview.rating !== '' && (state.roomReview.review.length >= 50 && state.roomReview.review.length <= 300 )) {
         state.isFormValid = true;
@@ -95,6 +104,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setOffersDataLoadingStatus, (state, action) => {
       state.isOffersDataLoading = action.payload;
+    })
+    .addCase(setFormSendingStatus, (state, action) => {
+      state.isSendingForm = action.payload;
     })
     .addCase(requireAuthorization, (state, action) => {
       state.authorizationStatus = action.payload;

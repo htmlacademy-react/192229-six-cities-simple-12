@@ -1,6 +1,6 @@
 import {AxiosInstance} from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import {loadComments, loadNearPlaces, loadOffer, loadOffers, redirectToRoute, requireAuthorization, setError, setOffersDataLoadingStatus, setUserData, unsetUserData} from './action';
+import {loadComments, loadNearPlaces, loadOffer, loadOffers, redirectToRoute, requireAuthorization, setError, setFormSendingStatus, setOffersDataLoadingStatus, setUserData, unsetUserData} from './action';
 import {APIRoute, TIMEOUT_SHOW_ERROR} from '../const';
 import { AppDispatch, Offer, RoomComment, RoomReview, State } from '../types/offers-list';
 import { store } from '.';
@@ -93,20 +93,19 @@ export const fetchCommentsAction = createAsyncThunk<void, string, {
   },
 );
 
-export const addCommentAction = createAsyncThunk<void, RoomReview, {
+export const addCommentAction = createAsyncThunk<RoomComment[], RoomReview, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
   'form/addComment',
   async ({rating, review, hotelId}, {dispatch, extra: api}) => {
-
+    dispatch(setFormSendingStatus(true));
     const {data} = await api.post<RoomComment[]>(`/comments/${hotelId}`, {'rating':rating, 'comment':review});
-    // eslint-disable-next-line no-console
-    console.log('form/addComment',data);
-    // saveToken(token);
-    // dispatch(requireAuthorization(AuthorizationStatus.Auth));
+
     dispatch(loadComments(data));
+    dispatch(setFormSendingStatus(false));
+    return data;
 
   },
 );

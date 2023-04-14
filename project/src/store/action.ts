@@ -33,7 +33,10 @@ export const validateCommentForm = createAction<RoomReview>('form/validateCommen
 
 export const setOffersDataLoadingStatus = createAction<boolean>('data/setOffersDataLoadingStatus');
 export const setOfferDataLoadingStatus = createAction<boolean>('data/setOffersDataLoadingStatus');
+export const setFormSendingStatus = createAction<boolean>('data/setFormSendingStatus');
+
 export const setRoomReview = createAction<RoomReview>('form/setRoomReview');
+export const resetReviewForm = createAction('form/resetReviewForm');
 
 export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
 export const setError = createAction<string | null>('game/setError');
