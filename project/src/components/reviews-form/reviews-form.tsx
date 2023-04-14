@@ -20,17 +20,6 @@ function ReviewsForm() : JSX.Element {
     dispatch(validateCommentForm(formData));
   };
 
-  // useEffect(() => {
-  //   if(isFormValid) {
-  //     ( async ()=> {
-  //       await store.dispatch(addCommentAction(formData));
-  //     }
-  //     )();
-  //   }
-
-
-  // },[formData, isFormValid]);
-
 
   return (
     <form className="reviews__form form" action="#" method="post" onSubmit={(evt)=>{
