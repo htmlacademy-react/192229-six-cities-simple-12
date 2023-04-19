@@ -67,4 +67,11 @@ export enum APIRoute {
   Logout = '/logout',
 }
 
+export enum NameSpace {
+  User = 'USER',
+  Form = 'FORM',
+  Data = 'DATA',
+  City = 'CITY',
+}
+
 export const TIMEOUT_SHOW_ERROR = 2000;

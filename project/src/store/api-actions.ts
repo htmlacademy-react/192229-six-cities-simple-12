@@ -1,6 +1,9 @@
 import {AxiosInstance} from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import {loadComments, loadNearPlaces, loadOffer, loadOffers, redirectToRoute, requireAuthorization, setError, setFormSendingStatus, setOffersDataLoadingStatus, setUserData, unsetUserData} from './action';
+import {setError} from '../store/city-process/city-process';
+import {loadComments, loadNearPlaces, loadOffer, loadOffers, setFormSendingStatus, setOffersDataLoadingStatus,} from '../store/data-process/data-process';
+
+
 import {APIRoute, TIMEOUT_SHOW_ERROR} from '../const';
 import { AppDispatch, Offer, RoomComment, RoomReview, State } from '../types/offers-list';
 import { store } from '.';
@@ -8,10 +11,12 @@ import { AppRoute, AuthorizationStatus } from '../components/const';
 import { saveToken, dropToken } from '../services/token';
 import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
+import { redirectToRoute } from './action';
+import { requireAuthorization, setUserData, unsetUserData } from './user-process/user-process';
 
 
 export const clearErrorAction = createAsyncThunk(
-  'game/clearError',
+  'city/clearError',
   () => {
     setTimeout(
       () => store.dispatch(setError(null)),
@@ -19,6 +24,7 @@ export const clearErrorAction = createAsyncThunk(
     );
   },
 );
+
 
 export const fetchOffersAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
@@ -83,8 +89,6 @@ export const fetchCommentsAction = createAsyncThunk<void, string, {
 
 
     const {data} = await api.get<RoomComment[]>(`/comments/${_arg}`);
-    // eslint-disable-next-line no-console
-    // console.log(data);
 
     dispatch(loadComments(data));
     // dispatch(setOfferDataLoadingStatus(false));
@@ -110,6 +114,7 @@ export const addCommentAction = createAsyncThunk<RoomComment[], RoomReview, {
   },
 );
 
+
 export const checkAuthAction = createAsyncThunk<void, undefined, {
     dispatch: AppDispatch;
     state: State;
@@ -117,14 +122,16 @@ export const checkAuthAction = createAsyncThunk<void, undefined, {
   }>(
     'user/checkAuth',
     async (_arg, {dispatch, extra: api}) => {
-      try {
-        const {data} = await api.get<UserData>(APIRoute.Login);
-        dispatch(requireAuthorization(AuthorizationStatus.Auth));
-        dispatch(setUserData(data));
-      } catch {
+      // try {
+      //   const {data} = await api.get<UserData>(APIRoute.Login);
+      //   dispatch(requireAuthorization(AuthorizationStatus.Auth));
+      //   dispatch(setUserData(data));
+      // } catch {
 
-        dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
-      }
+      //   dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
+      // }
+
+      await api.get<UserData>(APIRoute.Login);
     },
   );
 

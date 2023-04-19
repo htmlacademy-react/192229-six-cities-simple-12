@@ -6,19 +6,21 @@ import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
 import { FILTER_OPTIONS } from '../../components/const';
 import { OffersFilterList } from '../../components/offers-filter-list/offers-filter-list';
 import { useOffersFilter } from '../../hooks/use-offers-filter/use-offers-filter';
+import { getActiveCity, getActiveRoom, getSelectedOption } from '../../store/city-process/selector';
+import { getAllOffers } from '../../store/data-process/selector';
 
 
 function MainPage(): JSX.Element {
 
 
-  const selectedPoint = useAppSelector((state) => state.activeRoom);
+  const selectedPoint = useAppSelector(getActiveRoom);
 
-  const offers = useAppSelector((state) => state.offers);
-  const currentCity = useAppSelector((state) => state.activeCity);
-  const selectedOption = useAppSelector((state) => state.selectedOption.name);
+  const offers = useAppSelector(getAllOffers);
+  const currentCity = useAppSelector(getActiveCity);
+  const selectedOption = useAppSelector(getSelectedOption);
 
   // const currentCityOffers = offers.filter((offer) => offer.city.name === currentCity.city.name);
-  const currentCityOffers = useOffersFilter(currentCity.city.name, selectedOption, offers);
+  const currentCityOffers = useOffersFilter(currentCity.city.name, selectedOption.name, offers);
 
 
   return (

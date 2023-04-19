@@ -14,6 +14,7 @@ import { store } from '../../store';
 import { fetchOffersAction } from '../../store/api-actions';
 import browserHistory from '../../browser-history';
 import HistoryRouter from '../history-route/history-route';
+import { getOffersDataLoadingStatus } from '../../store/data-process/selector';
 
 
 store.dispatch(fetchOffersAction());
@@ -21,8 +22,7 @@ store.dispatch(fetchOffersAction());
 
 function App(): JSX.Element {
   // const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
-
+  const isOffersDataLoading = useAppSelector(getOffersDataLoadingStatus);
 
   // if (authorizationStatus === AuthorizationStatus.Unknown || isOffersDataLoading) {
   if (isOffersDataLoading) {

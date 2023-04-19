@@ -9,15 +9,17 @@ import { store } from '../../store';
 import { fetchCommentsAction, fetchNearOffersAction, fetchOfferAction } from '../../store/api-actions';
 import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
 import { useEffect } from 'react';
+import { getAuthorizationStatus } from '../../store/user-process/selector';
+import { getComments, getNearPlaces, getOffer } from '../../store/data-process/selector';
 
 
 function Property() : JSX.Element {
   const {id} = useParams();
   const navigate = useNavigate();
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const offer = useAppSelector((state) => state.offer);
-  const reviews = useAppSelector((state) => state.comments);
-  const nearPlaces = useAppSelector((state) => state.nearPlaces);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const offer = useAppSelector(getOffer);
+  const reviews = useAppSelector(getComments);
+  const nearPlaces = useAppSelector(getNearPlaces);
 
 
   useEffect(() => {

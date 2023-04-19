@@ -1,9 +1,3 @@
-// export type UserData = {
-//     id: number;
-//     email: string;
-//     token: string;
-//   };
-
 export type UserData = {
   avatarUrl: string;
   email: string;
@@ -12,3 +6,4 @@ export type UserData = {
   name: string;
   token: string;
   };
+

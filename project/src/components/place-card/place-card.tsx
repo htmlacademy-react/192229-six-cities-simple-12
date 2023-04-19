@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { generatePath } from 'react-router-dom';
 import { AppRoute } from '../const';
 import { useAppDispatch } from '../../hooks/use-app-dispatch/use-app-dispatch';
-import { changeActiveRoom } from '../../store/action';
+import { changeActiveRoom } from '../../store/city-process/city-process';
 
 type PlaceCardProps = {
   offer: Offer;
