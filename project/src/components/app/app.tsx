@@ -10,14 +10,14 @@ import PrivateRoute from '../private-route/private-route';
 // import { Offer } from '../../types/offers-list';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
-import { store } from '../../store';
-import { fetchOffersAction } from '../../store/api-actions';
+// import { store } from '../../store';
+// import { checkAuthAction, fetchOffersAction } from '../../store/api-actions';
 import browserHistory from '../../browser-history';
 import HistoryRouter from '../history-route/history-route';
 import { getOffersDataLoadingStatus } from '../../store/data-process/selector';
 
 
-store.dispatch(fetchOffersAction());
+// store.dispatch(fetchOffersAction());
 // store.dispatch(checkAuthAction());
 
 function App(): JSX.Element {

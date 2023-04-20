@@ -2,6 +2,8 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { NameSpace } from '../../const';
 import { offer } from '../../mocks/offer';
 import { DataProcess, Offer, RoomComment } from '../../types/offers-list';
+// import { AuthorizationStatus } from '../../components/const';
+// import { checkAuthAction } from '../api-actions';
 
 const initialState: DataProcess = {
   offers : [],
@@ -11,6 +13,7 @@ const initialState: DataProcess = {
   comments: [],
   nearPlaces: []
 };
+
 
 export const dataProcess = createSlice({
   name: NameSpace.Data,
@@ -34,7 +37,6 @@ export const dataProcess = createSlice({
     setFormSendingStatus: (state, action : PayloadAction<boolean>) => {
       state.isSendingForm = action.payload;
     },
-
   }
 });
 
