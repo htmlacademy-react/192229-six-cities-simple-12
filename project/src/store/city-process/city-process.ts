@@ -18,8 +18,7 @@ const initialState: CityProcess = {
     tabIndex: 0,
     name: 'Popular'
   },
-  isFilterOpen: false,
-  error: null,
+  isFilterOpen: false
 };
 
 export const cityProcess = createSlice({
@@ -37,11 +36,8 @@ export const cityProcess = createSlice({
     },
     setOffersFilter: (state, action : PayloadAction<OffersFilterOptionProp>) => {
       state.selectedOption = action.payload;
-    },
-    setError: (state, action : PayloadAction<string | null>) => {
-      state.error = action.payload;
     }
   }
 });
 
-export const {changeActiveCity, changeActiveRoom, changeFilterIsOpen, setOffersFilter, setError} = cityProcess.actions;
+export const {changeActiveCity, changeActiveRoom, changeFilterIsOpen, setOffersFilter} = cityProcess.actions;

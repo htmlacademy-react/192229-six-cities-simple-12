@@ -1,9 +1,9 @@
-import {PayloadAction, createSlice} from '@reduxjs/toolkit';
-import { NameSpace} from '../../const';
-import {checkAuthAction, loginAction, logoutAction} from '../api-actions';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { NameSpace } from '../../const';
+import { checkAuthAction, loginAction, logoutAction } from '../api-actions';
 import { AuthorizationStatus } from '../../components/const';
 import { UserProcess } from '../../types/offers-list';
-import { UserData } from '../../types/user-data';
+// import { UserData } from '../../types/user-data';
 
 
 const initialState: UserProcess = {
@@ -15,9 +15,9 @@ export const userProcess = createSlice({
   name: NameSpace.User,
   initialState,
   reducers: {
-    setUserData: (state, action : PayloadAction< UserData | null >) => {
-      state.userData = action.payload;
-    },
+    // setUserData: (state, action : PayloadAction< UserData | null >) => {
+    //   state.userData = action.payload;
+    // },
     unsetUserData: (state) => {
       state.userData = null;
     },
@@ -27,22 +27,26 @@ export const userProcess = createSlice({
   },
   extraReducers(builder) {
     builder
-      .addCase(checkAuthAction.fulfilled, (state) => {
+      .addCase(checkAuthAction.fulfilled, (state, action) => {
         state.authorizationStatus = AuthorizationStatus.Auth;
+        state.userData = action.payload;
       })
       .addCase(checkAuthAction.rejected, (state) => {
         state.authorizationStatus = AuthorizationStatus.NoAuth;
+        state.userData = null;
       })
-      .addCase(loginAction.fulfilled, (state) => {
+      .addCase(loginAction.fulfilled, (state, action) => {
         state.authorizationStatus = AuthorizationStatus.Auth;
+        state.userData = action.payload;
       })
-      .addCase(loginAction.rejected, (state) => {
+      .addCase(loginAction.rejected, (state, action) => {
         state.authorizationStatus = AuthorizationStatus.NoAuth;
       })
       .addCase(logoutAction.fulfilled, (state) => {
         state.authorizationStatus = AuthorizationStatus.NoAuth;
+        state.userData = null;
       });
   }
 });
 
-export const { setUserData, unsetUserData, requireAuthorization } = userProcess.actions;
+export const { unsetUserData, requireAuthorization } = userProcess.actions;

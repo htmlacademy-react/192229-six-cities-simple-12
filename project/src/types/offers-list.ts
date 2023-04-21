@@ -97,6 +97,7 @@ export type DataProcess = {
     isSendingForm: boolean;
     comments: RoomComment[];
     nearPlaces: Offer[];
+    error: string | null;
 };
 
 export type CityProcess = {
@@ -104,7 +105,6 @@ export type CityProcess = {
     selectedOption : OffersFilterOptionProp;
     activeRoom: RoomState;
     isFilterOpen: boolean;
-    error: string | null;
   };
 
 export type FormProcess = {

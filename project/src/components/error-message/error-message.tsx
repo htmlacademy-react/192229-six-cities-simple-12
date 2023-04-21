@@ -1,5 +1,6 @@
 import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
-import { getError } from '../../store/city-process/selector';
+import { getError } from '../../store/data-process/selector';
+
 import './error-message.css';
 
 export function ErrorMessage(): JSX.Element | null {

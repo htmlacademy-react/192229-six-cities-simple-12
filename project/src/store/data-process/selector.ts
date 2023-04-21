@@ -8,3 +8,4 @@ export const getOffersDataLoadingStatus = (state: State): boolean => state[NameS
 export const getSendingFormStatus = (state: State): boolean => state[NameSpace.Data].isSendingForm;
 export const getComments = (state: State): RoomComment[] => state[NameSpace.Data].comments;
 export const getNearPlaces = (state: State): Offer[] => state[NameSpace.Data].nearPlaces;
+export const getError = (state: State): string | null => state[NameSpace.Data].error;
