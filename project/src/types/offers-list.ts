@@ -98,6 +98,7 @@ export type DataProcess = {
     comments: RoomComment[];
     nearPlaces: Offer[];
     error: string | null;
+    hasError: boolean;
 };
 
 export type CityProcess = {

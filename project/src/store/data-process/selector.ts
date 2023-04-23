@@ -9,3 +9,4 @@ export const getSendingFormStatus = (state: State): boolean => state[NameSpace.D
 export const getComments = (state: State): RoomComment[] => state[NameSpace.Data].comments;
 export const getNearPlaces = (state: State): Offer[] => state[NameSpace.Data].nearPlaces;
 export const getError = (state: State): string | null => state[NameSpace.Data].error;
+export const getErrorStatus = (state: State): boolean => state[NameSpace.Data].hasError;

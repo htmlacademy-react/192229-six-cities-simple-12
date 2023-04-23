@@ -3,7 +3,6 @@ import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
 import { changeActiveCity } from '../../store/city-process/city-process';
 import { getActiveCity } from '../../store/city-process/selector';
 import { OfferCity } from '../../types/offers-list';
-// import {changeActiveCity} from '../../store/city-process/city-process';
 
 
 type LocationsItemProp = {

@@ -1,4 +1,3 @@
-// import axios, {AxiosInstance} from 'axios';
 import axios, {AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse} from 'axios';
 import {getToken} from './token';
 import { StatusCodes } from 'http-status-codes';
@@ -20,7 +19,6 @@ export const createAPI = (): AxiosInstance => {
     baseURL: BACKEND_URL,
     timeout: REQUEST_TIMEOUT,
   });
-
 
   api.interceptors.request.use(
     (config: AxiosRequestConfig) => {
@@ -44,7 +42,6 @@ export const createAPI = (): AxiosInstance => {
       throw error;
     }
   );
-
 
   return api;
 };

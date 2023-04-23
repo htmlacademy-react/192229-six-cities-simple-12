@@ -15,9 +15,6 @@ export const userProcess = createSlice({
   name: NameSpace.User,
   initialState,
   reducers: {
-    // setUserData: (state, action : PayloadAction< UserData | null >) => {
-    //   state.userData = action.payload;
-    // },
     unsetUserData: (state) => {
       state.userData = null;
     },
