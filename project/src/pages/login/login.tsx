@@ -2,11 +2,12 @@ import { useRef, FormEvent } from 'react';
 import { useAppDispatch } from '../../hooks/use-app-dispatch/use-app-dispatch';
 import { AuthData } from '../../types/auth-data';
 import { loginAction } from '../../store/api-actions';
+import { getRandomCity } from '../../utils';
 
 function Login(): JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
-
+  const randomCity = getRandomCity();
   const dispatch = useAppDispatch();
 
   const onSubmit = (authData: AuthData) => {
@@ -52,6 +53,7 @@ function Login(): JSX.Element {
                   name="email"
                   id="email"
                   placeholder="E-mail"
+                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                   required
                 />
               </div>
@@ -63,6 +65,7 @@ function Login(): JSX.Element {
                   name="password"
                   id="password"
                   placeholder="Password"
+                  pattern="[0-9a-zA-Z]{2,}$"
                   required
                 />
               </div>
@@ -74,7 +77,7 @@ function Login(): JSX.Element {
           <section className="locations locations--login locations--current">
             <div className="locations__item">
               <a className="locations__item-link" href="#">
-                <span>Amsterdam</span>
+                <span>{randomCity}</span>
               </a>
             </div>
           </section>

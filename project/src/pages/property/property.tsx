@@ -1,23 +1,25 @@
 import ReviewsForm from '../../components/reviews-form/reviews-form';
-
 import { useNavigate, useParams } from 'react-router-dom';
 import { ReviewsList } from '../../components/reviews-list/reviews-list';
-// import { nearPlaces } from '../../mocks/near-places';
 import { NearPlacesList } from '../../components/near-places-list/near-places-list';
 import { Map } from '../../components/map/map';
 import { store } from '../../store';
 import { fetchCommentsAction, fetchNearOffersAction, fetchOfferAction } from '../../store/api-actions';
 import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
 import { useEffect } from 'react';
+import { getAuthorizationStatus } from '../../store/user-process/selector';
+import { getComments, getNearPlaces, getOffer } from '../../store/data-process/selector';
+import { getRating } from '../../utils';
+import { RoomGallery } from '../../components/room-gallery/room-gallery';
 
 
 function Property() : JSX.Element {
   const {id} = useParams();
   const navigate = useNavigate();
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const offer = useAppSelector((state) => state.offer);
-  const reviews = useAppSelector((state) => state.comments);
-  const nearPlaces = useAppSelector((state) => state.nearPlaces);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const offer = useAppSelector(getOffer);
+  const reviews = useAppSelector(getComments);
+  const nearPlaces = useAppSelector(getNearPlaces);
 
 
   useEffect(() => {
@@ -37,34 +39,16 @@ function Property() : JSX.Element {
   },[id, navigate]);
 
 
-  const {isPremium, description, title, host, rating, price, goods, bedrooms, type, maxAdults} = offer;
-  const starsStyle = String(Math.floor(rating * 100 / 5));
+  const {isPremium, description, title, host, rating, price, goods, bedrooms, type, maxAdults, images} = offer;
+
+  const starsStyle = getRating(rating);
 
 
   return (
     <main className="page__main page__main--property">
       <section className="property">
         <div className="property__gallery-container container">
-          <div className="property__gallery">
-            <div className="property__image-wrapper">
-              <img className="property__image" src="img/room.jpg" alt="Room"/>
-            </div>
-            <div className="property__image-wrapper">
-              <img className="property__image" src="img/apartment-01.jpg" alt="Room"/>
-            </div>
-            <div className="property__image-wrapper">
-              <img className="property__image" src="img/apartment-02.jpg" alt="Room"/>
-            </div>
-            <div className="property__image-wrapper">
-              <img className="property__image" src="img/apartment-03.jpg" alt="Room"/>
-            </div>
-            <div className="property__image-wrapper">
-              <img className="property__image" src="img/studio-01.jpg" alt="Room"/>
-            </div>
-            <div className="property__image-wrapper">
-              <img className="property__image" src="img/apartment-01.jpg" alt="Room"/>
-            </div>
-          </div>
+          <RoomGallery images={images}/>
         </div>
         <div className="property__container container">
           <div className="property__wrapper">

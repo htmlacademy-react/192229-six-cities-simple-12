@@ -1,17 +1,19 @@
 import { ChangeEvent } from 'react';
 import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
 import { useAppDispatch } from '../../hooks/use-app-dispatch/use-app-dispatch';
-import { resetReviewForm, setRoomReview, validateCommentForm } from '../../store/action';
+import { resetReviewForm, setRoomReview, validateCommentForm } from '../../store/form-process/form-process';
 import { store } from '../../store';
 import { addCommentAction } from '../../store/api-actions';
 import { useParams } from 'react-router-dom';
+import { getFormValidStatus, getRoomReview } from '../../store/form-process/selector';
+import { getSendingFormStatus } from '../../store/data-process/selector';
 
 function ReviewsForm() : JSX.Element {
   const {id} = useParams();
   const dispatch = useAppDispatch();
-  const formData = useAppSelector((state) => state.roomReview);
-  const isFormValid = useAppSelector((state) => state.isFormValid);
-  const isSending = useAppSelector((state) => state.isSendingForm);
+  const formData = useAppSelector(getRoomReview);
+  const isFormValid = useAppSelector(getFormValidStatus);
+  const isSending = useAppSelector(getSendingFormStatus);
 
   const fieldChangeHandle = (evt : ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) : void => {
     const {name, value} = evt.target;

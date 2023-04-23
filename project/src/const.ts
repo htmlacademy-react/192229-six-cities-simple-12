@@ -7,6 +7,13 @@ export const CITES = [
   { id: 6, name: 'Dusseldorf'}
 ];
 
+export const RANDOM_CITES = [
+  'Paris', 'Cologne', 'Brussels' ,'Amsterdam','Hamburg','Dusseldorf'
+];
+
+export const START_INDEX_RANDOM_CITY = 0;
+
+
 export const CITES_OBJ = [
   { id: 1,
     city: {
@@ -67,4 +74,13 @@ export enum APIRoute {
   Logout = '/logout',
 }
 
+export enum NameSpace {
+  User = 'USER',
+  Form = 'FORM',
+  Data = 'DATA',
+  City = 'CITY',
+}
+
 export const TIMEOUT_SHOW_ERROR = 2000;
+export const MAX_ROOM_FEEDBACKS = 10;
+export const MAX_STARS_IN_REEDBACK = 5;

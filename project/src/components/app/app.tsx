@@ -7,24 +7,23 @@ import Layout from '../layout/layout';
 import PageNotFound from '../../pages/page-not-found/page-not-found';
 import ScrollToTop from '../../components/scroll-to-top/scroll-to-top';
 import PrivateRoute from '../private-route/private-route';
-// import { Offer } from '../../types/offers-list';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
 import { store } from '../../store';
-import { fetchOffersAction } from '../../store/api-actions';
+import { checkAuthAction, fetchOffersAction } from '../../store/api-actions';
 import browserHistory from '../../browser-history';
 import HistoryRouter from '../history-route/history-route';
+import { getOffersDataLoadingStatus } from '../../store/data-process/selector';
 
 
 store.dispatch(fetchOffersAction());
-// store.dispatch(checkAuthAction());
+store.dispatch(checkAuthAction());
 
 function App(): JSX.Element {
-  // const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
+
+  const isOffersDataLoading = useAppSelector(getOffersDataLoadingStatus);
 
 
-  // if (authorizationStatus === AuthorizationStatus.Unknown || isOffersDataLoading) {
   if (isOffersDataLoading) {
     return (
       <LoadingScreen />

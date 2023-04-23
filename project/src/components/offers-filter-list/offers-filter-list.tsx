@@ -3,7 +3,8 @@ import { OffersFilterOption } from '../offers-filter-option/offers-filter-option
 import { OffersFilterOptionProp } from '../../types/offers-list';
 import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
 import { useAppDispatch } from '../../hooks/use-app-dispatch/use-app-dispatch';
-import { changeFilterIsOpen } from '../../store/action';
+import { changeFilterIsOpen } from '../../store/city-process/city-process';
+import { getIsFilterOpen, getSelectedOption } from '../../store/city-process/selector';
 
 
 type OffersFilterListProp = {
@@ -12,8 +13,8 @@ type OffersFilterListProp = {
 
 export function OffersFilterList ({options} : OffersFilterListProp) : JSX.Element {
   // const [isSortOpen, setSortState] = useState<boolean>(false);
-  const isSortOpen = useAppSelector((state) => state.isFilterOpen);
-  const activeFilter = useAppSelector((state) => state.selectedOption);
+  const isSortOpen = useAppSelector(getIsFilterOpen);
+  const activeFilter = useAppSelector(getSelectedOption);
   const dispatch = useAppDispatch();
 
   return (

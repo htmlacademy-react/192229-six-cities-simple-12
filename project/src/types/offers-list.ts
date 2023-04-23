@@ -1,4 +1,6 @@
+import { AuthorizationStatus } from '../components/const.js';
 import {store} from '../store/index.js';
+import { UserData } from './user-data.js';
 
 export type OfferLocation = {
     latitude: number;
@@ -83,6 +85,34 @@ export type CityId = number;
 export type State = ReturnType<typeof store.getState>;
 
 export type AppDispatch = typeof store.dispatch;
+
+export type UserProcess = {
+    authorizationStatus: AuthorizationStatus;
+    userData : UserData | null;
+  };
+export type DataProcess = {
+    offers: Offer[];
+    offer: Offer;
+    isOffersDataLoading: boolean;
+    isSendingForm: boolean;
+    comments: RoomComment[];
+    nearPlaces: Offer[];
+    error: string | null;
+    hasError: boolean;
+};
+
+export type CityProcess = {
+    activeCity : CityState;
+    selectedOption : OffersFilterOptionProp;
+    activeRoom: RoomState;
+    isFilterOpen: boolean;
+  };
+
+export type FormProcess = {
+    roomReview: RoomReview;
+    isFormValid: boolean;
+};
+
 
 export type OffersFilterOptionProp = {
     tabIndex: number;

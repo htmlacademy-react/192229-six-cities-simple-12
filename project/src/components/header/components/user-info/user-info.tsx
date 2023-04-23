@@ -3,10 +3,12 @@ import { useAppSelector } from '../../../../hooks/use-app-selector/use-app-selec
 import { AppRoute, AuthorizationStatus } from '../../../const';
 import { logoutAction } from '../../../../store/api-actions';
 import { useAppDispatch } from '../../../../hooks/use-app-dispatch/use-app-dispatch';
+import { getAuthorizationStatus, getUserData } from '../../../../store/user-process/selector';
+
 
 export function UserInfo (): JSX.Element {
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const userData = useAppSelector((state) => state.userData);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const userData = useAppSelector(getUserData);
   const dispatch = useAppDispatch();
   return(
     authorizationStatus === AuthorizationStatus.Auth ?
