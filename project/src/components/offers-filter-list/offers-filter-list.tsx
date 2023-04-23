@@ -12,7 +12,7 @@ type OffersFilterListProp = {
 }
 
 export function OffersFilterList ({options} : OffersFilterListProp) : JSX.Element {
-  // const [isSortOpen, setSortState] = useState<boolean>(false);
+
   const isSortOpen = useAppSelector(getIsFilterOpen);
   const activeFilter = useAppSelector(getSelectedOption);
   const dispatch = useAppDispatch();
