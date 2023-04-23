@@ -50,4 +50,3 @@ export function getSortedFeedbacks(feedbacks: RoomComment[]): RoomComment[] {
     }
   }).slice(0, MAX_ROOM_FEEDBACKS);
 }
-
