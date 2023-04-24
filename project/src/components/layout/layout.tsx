@@ -2,6 +2,7 @@ import Header from '../header/header';
 import {Outlet} from 'react-router-dom';
 
 function Layuout(): JSX.Element {
+
   return (
     <div className="page page--gray page--main">
       <div style={{display: 'none'}}>

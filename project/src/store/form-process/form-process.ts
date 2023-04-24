@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { NameSpace } from '../../const';
+import { MAX_SYMBOLS, MIN_SYMBOLS, NameSpace } from '../../const';
 import { FormProcess, RoomReview } from '../../types/offers-list';
 
 const initialState: FormProcess = {
@@ -26,7 +26,7 @@ export const formProcess = createSlice({
       state.roomReview = action.payload;
     },
     validateCommentForm: (state,action) => {
-      if(state.roomReview.rating !== '' && (state.roomReview.review.length >= 50 && state.roomReview.review.length <= 300 )) {
+      if(state.roomReview.rating !== '' && (state.roomReview.review.length >= MIN_SYMBOLS && state.roomReview.review.length <= MAX_SYMBOLS )) {
         state.isFormValid = true;
       }
       else {

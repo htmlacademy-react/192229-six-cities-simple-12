@@ -1,12 +1,12 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { NameSpace } from '../../const';
-import { offer } from '../../mocks/offer';
+import { NameSpace, OFFER } from '../../const';
+
 import { DataProcess} from '../../types/offers-list';
 import { addCommentAction, fetchCommentsAction, fetchNearOffersAction, fetchOfferAction, fetchOffersAction } from '../api-actions';
 
 const initialState: DataProcess = {
   offers : [],
-  offer : offer,
+  offer : OFFER,
   isOffersDataLoading : false,
   isSendingForm: false,
   comments: [],
@@ -14,7 +14,6 @@ const initialState: DataProcess = {
   error: null,
   hasError: false,
 };
-
 
 export const dataProcess = createSlice({
   name: NameSpace.Data,
@@ -52,7 +51,7 @@ export const dataProcess = createSlice({
         state.offer = action.payload;
       })
       .addCase(fetchOfferAction.rejected, (state) => {
-        state.offer = offer;
+        state.offer = OFFER;
       })
       .addCase(fetchCommentsAction.pending, (state) => {
         state.error = null;

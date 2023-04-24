@@ -3,6 +3,8 @@ import { useAppDispatch } from '../../hooks/use-app-dispatch/use-app-dispatch';
 import { AuthData } from '../../types/auth-data';
 import { loginAction } from '../../store/api-actions';
 import { getRandomCity } from '../../utils';
+import { Link } from 'react-router-dom';
+import { AppRoute } from '../../components/const';
 
 function Login(): JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);
@@ -31,9 +33,9 @@ function Login(): JSX.Element {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <a className="header__logo-link" href="main.html">
+              <Link className="header__logo-link" to={AppRoute.Main}>
                 <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -53,7 +55,6 @@ function Login(): JSX.Element {
                   name="email"
                   id="email"
                   placeholder="E-mail"
-                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                   required
                 />
               </div>
@@ -61,7 +62,7 @@ function Login(): JSX.Element {
                 <label className="visually-hidden">Password</label>
                 <input ref={passwordRef}
                   className="login__input form__input"
-                  type="text"
+                  type="password"
                   name="password"
                   id="password"
                   placeholder="Password"

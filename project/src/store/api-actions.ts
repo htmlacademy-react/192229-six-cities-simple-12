@@ -2,12 +2,10 @@ import {AxiosInstance} from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {APIRoute, TIMEOUT_SHOW_ERROR} from '../const';
 import { AppDispatch, Offer, RoomComment, RoomReview, State } from '../types/offers-list';
-
 import { saveToken, dropToken } from '../services/token';
 import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
 import { dataProcess } from './data-process/data-process';
-
 
 export const clearErrorAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
@@ -29,7 +27,7 @@ export const fetchOffersAction = createAsyncThunk<Offer[], undefined, {
   extra: AxiosInstance;
 }> (
   'data/fetchOffers',
-  async (_arg, {dispatch, extra: api}) => {
+  async (_arg, { extra: api}) => {
     const {data} = await api.get<Offer[]>(APIRoute.Offers);
     return data;
   },
@@ -41,7 +39,7 @@ export const fetchNearOffersAction = createAsyncThunk<Offer[], string, {
   extra: AxiosInstance;
 }> (
   'data/fetchNearOffers',
-  async (_arg, {dispatch, extra: api}) => {
+  async (_arg, { extra: api}) => {
 
     const {data} = await api.get<Offer[]>(`/hotels/${_arg}/nearby`);
     return data;
@@ -55,7 +53,7 @@ export const fetchOfferAction = createAsyncThunk<Offer, string, {
   extra: AxiosInstance;
 }> (
   'data/fetchOffer',
-  async (_arg, {dispatch, extra: api}) => {
+  async (_arg, { extra: api}) => {
 
     const {data} = await api.get<Offer>(`/hotels/${_arg}`);
     return data;
@@ -69,7 +67,7 @@ export const fetchCommentsAction = createAsyncThunk<RoomComment[], string, {
   extra: AxiosInstance;
 }> (
   'data/fetchComments',
-  async (_arg, {dispatch, extra: api}) => {
+  async (_arg, {extra: api}) => {
     const {data} = await api.get<RoomComment[]>(`/comments/${_arg}`);
     return data;
   },
@@ -87,7 +85,6 @@ export const addCommentAction = createAsyncThunk<RoomComment[], RoomReview, {
   },
 );
 
-
 export const checkAuthAction = createAsyncThunk<UserData | null, undefined, {
     dispatch: AppDispatch;
     state: State;
@@ -99,7 +96,6 @@ export const checkAuthAction = createAsyncThunk<UserData | null, undefined, {
       return data;
     }
   );
-
 
 export const loginAction = createAsyncThunk<UserData, AuthData, {
     dispatch: AppDispatch;
@@ -113,7 +109,6 @@ export const loginAction = createAsyncThunk<UserData, AuthData, {
       return data;
     },
   );
-
 
 export const logoutAction = createAsyncThunk<void, undefined, {
     dispatch: AppDispatch;

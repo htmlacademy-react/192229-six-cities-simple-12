@@ -6,7 +6,6 @@ import { useAppDispatch } from '../../hooks/use-app-dispatch/use-app-dispatch';
 import { changeFilterIsOpen } from '../../store/city-process/city-process';
 import { getIsFilterOpen, getSelectedOption } from '../../store/city-process/selector';
 
-
 type OffersFilterListProp = {
     options: OffersFilterOptionProp[];
 }

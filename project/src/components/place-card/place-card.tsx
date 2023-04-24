@@ -7,15 +7,12 @@ import { changeActiveRoom } from '../../store/city-process/city-process';
 
 type PlaceCardProps = {
   offer: Offer;
-
 }
 
 function PlaceCard(props: PlaceCardProps): JSX.Element {
 
-
   const {isPremium, previewImage, price, type, title, id} = props.offer;
   const dispatch = useAppDispatch();
-
 
   return (
     <article className="cities__card place-card" onMouseEnter={ () => dispatch(changeActiveRoom({id: id})) } onMouseLeave={() => dispatch(changeActiveRoom({id: null}))}>

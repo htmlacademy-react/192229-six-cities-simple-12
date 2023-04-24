@@ -1,6 +1,5 @@
 import {PayloadAction, createSlice} from '@reduxjs/toolkit';
 import {NameSpace} from '../../const';
-
 import { CityProcess, CityState, OffersFilterOptionProp, RoomState } from '../../types/offers-list';
 
 const initialState: CityProcess = {

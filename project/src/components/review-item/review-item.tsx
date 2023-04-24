@@ -1,9 +1,10 @@
 import { Review } from '../../types/offers-list';
 
-
 export function ReviewItem({comment,date,user}: Review) : JSX.Element {
+
   const { name, avatarUrl} = user;
   const commentDate = new Date(String(date));
+
   return (
     <li className="reviews__item">
       <div className="reviews__user user">

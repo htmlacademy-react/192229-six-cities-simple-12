@@ -8,7 +8,6 @@ type PlaceOfferListProps = {
 
 export function PlacesList({offerList} : PlaceOfferListProps) : JSX.Element {
 
-
   return (
     <div className="cities__places-list places__list tabs__content" >
       {offerList.map((offer)=>{
@@ -18,6 +17,5 @@ export function PlacesList({offerList} : PlaceOfferListProps) : JSX.Element {
         );
       })}
     </div>
-
   );
 }

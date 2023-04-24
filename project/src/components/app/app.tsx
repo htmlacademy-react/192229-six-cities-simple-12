@@ -15,7 +15,6 @@ import browserHistory from '../../browser-history';
 import HistoryRouter from '../history-route/history-route';
 import { getOffersDataLoadingStatus } from '../../store/data-process/selector';
 
-
 store.dispatch(fetchOffersAction());
 store.dispatch(checkAuthAction());
 
@@ -23,22 +22,22 @@ function App(): JSX.Element {
 
   const isOffersDataLoading = useAppSelector(getOffersDataLoadingStatus);
 
-
   if (isOffersDataLoading) {
     return (
       <LoadingScreen />
     );
   }
+
   return (
     <HistoryRouter history={browserHistory}>
       <ScrollToTop />
       <Routes>
-        <Route path='/' element={<Layout />}>
+        <Route path={AppRoute.Main} element={<Layout />}>
           <Route index element={<MainPage />} />
           <Route path={AppRoute.Property} element={<Property />} />
         </Route>
         <Route path={AppRoute.Login} element={<PrivateRoute><Login /></PrivateRoute>} />
-        <Route path="*" element={<PageNotFound />}/>
+        <Route path={AppRoute.NotFound} element={<PageNotFound />}/>
       </Routes>
     </HistoryRouter>
   );

@@ -7,6 +7,7 @@ type ReviewListProps = {
 };
 
 export function ReviewsList ({reviews}: ReviewListProps) : JSX.Element {
+
   return (
     <ul className="reviews__list">
       { getSortedFeedbacks(reviews).map((review) => <ReviewItem key={review.id} {...review} />)}
