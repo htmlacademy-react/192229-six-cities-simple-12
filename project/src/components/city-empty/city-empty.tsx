@@ -1,9 +1,10 @@
 import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
 import { getActiveCity } from '../../store/city-process/selector';
 
-
 export function CityEmpty () : JSX.Element {
+
   const currentCity = useAppSelector(getActiveCity);
+
   return (
     <div className="cities">
       <div className="cities__places-container cities__places-container--empty container">

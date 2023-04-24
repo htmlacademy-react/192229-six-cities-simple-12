@@ -1,7 +1,6 @@
 import { NameSpace } from '../../const';
 import { Offer, RoomComment, State } from '../../types/offers-list';
 
-
 export const getAllOffers = (state: State): Offer[] => state[NameSpace.Data].offers;
 export const getOffer = (state: State): Offer => state[NameSpace.Data].offer;
 export const getOffersDataLoadingStatus = (state: State): boolean => state[NameSpace.Data].isOffersDataLoading;

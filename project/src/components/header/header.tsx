@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { UserInfo } from './components/user-info/user-info';
 
 function Header(): JSX.Element {
+
   return (
     <header className="header">
       <div className="container">

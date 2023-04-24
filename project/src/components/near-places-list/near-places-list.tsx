@@ -6,6 +6,7 @@ type NearPlacesListProps = {
 }
 
 export function NearPlacesList ({places}:NearPlacesListProps) : JSX.Element {
+
   return (
     <div className="near-places__list places__list">
       {places.map((place) => <NearPlace key={place.id} place={place}/>)}

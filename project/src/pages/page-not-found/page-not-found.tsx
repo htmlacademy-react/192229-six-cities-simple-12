@@ -1,8 +1,12 @@
+import { Link } from 'react-router-dom';
+import { AppRoute } from '../../components/const';
+
 function PageNotFound () : JSX.Element {
+
   return (
     <>
       <p>Page not found</p>
-      <a href='/'>Go to main</a>
+      <Link to={AppRoute.Main}>Go to main</Link>
     </>
   );
 }

@@ -1,10 +1,9 @@
 import { useEffect, useRef } from 'react';
 import { Offer, OfferCity } from '../../types/offers-list';
 import { useMap } from '../../hooks/use-map/use-map';
-import L from 'leaflet';
+import L, { LayerGroup, Marker } from 'leaflet';
 import { URL_MARKER_CURRENT, URL_MARKER_DEFAULT } from '../const';
 import 'leaflet/dist/leaflet.css';
-
 
 type MapLocationProps = {
   city: OfferCity;
@@ -17,6 +16,7 @@ export function Map({city, points, activeCard = null, height = '794px'}: MapLoca
 
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
+  const layer = new LayerGroup();
 
   const defaultCustomIcon = L.icon({
     iconUrl: URL_MARKER_DEFAULT,
@@ -41,22 +41,33 @@ export function Map({city, points, activeCard = null, height = '794px'}: MapLoca
 
   useEffect(() => {
     if (map) {
+
       points.forEach((point) => {
-        L
-          .marker({
-            lat: point.location.latitude,
-            lng: point.location.longitude,
-          }, {
-            icon: activeCard === point.id ? currentCustomIcon : defaultCustomIcon ,
-          })
-          .addTo(map);
+
+        const marker = new Marker({
+          lat: point.location.latitude,
+          lng: point.location.longitude,
+        });
+
+        marker.setIcon(
+          activeCard === point.id ? currentCustomIcon : defaultCustomIcon
+        );
+
+        layer.addLayer(marker);
+
       });
+      layer.addTo(map);
+
     }
+
+    return () => {
+      layer.clearLayers();
+    };
+
+
   }, [map, points, activeCard]);
 
   return (
-    <div style={{height: height }} ref={mapRef}>
-
-    </div>
+    <div style={{height: height }} ref={mapRef}></div>
   );
 }

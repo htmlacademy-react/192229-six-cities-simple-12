@@ -11,16 +11,16 @@ import { getAuthorizationStatus } from '../../store/user-process/selector';
 import { getComments, getNearPlaces, getOffer } from '../../store/data-process/selector';
 import { getRating } from '../../utils';
 import { RoomGallery } from '../../components/room-gallery/room-gallery';
-
+import { AppRoute } from '../../components/const';
 
 function Property() : JSX.Element {
+
   const {id} = useParams();
   const navigate = useNavigate();
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const offer = useAppSelector(getOffer);
   const reviews = useAppSelector(getComments);
   const nearPlaces = useAppSelector(getNearPlaces);
-
 
   useEffect(() => {
     ( async ()=> {
@@ -29,20 +29,18 @@ function Property() : JSX.Element {
       await store.dispatch(fetchNearOffersAction(String(id)));
 
       if(!data.payload) {
-        navigate('/not-found');
+        navigate(AppRoute.NotFound);
       }
 
     }
     )();
 
-
   },[id, navigate]);
-
 
   const {isPremium, description, title, host, rating, price, goods, bedrooms, type, maxAdults, images} = offer;
 
-  const starsStyle = getRating(rating);
 
+  const starsStyle = getRating(rating);
 
   return (
     <main className="page__main page__main--property">
@@ -111,7 +109,7 @@ function Property() : JSX.Element {
           </div>
         </div>
         <section className="property__map map">
-          <Map city={offer.city} points={nearPlaces} height={'579px'}/>
+          <Map city={offer.city} points={[ ...nearPlaces, offer ]} activeCard={Number(id)} height={'579px'}/>
         </section>
       </section>
       <div className="container">

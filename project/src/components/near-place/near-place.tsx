@@ -6,10 +6,10 @@ type NearPlaceProps = {
     place: Offer;
 }
 
-
 export function NearPlace ({place}: NearPlaceProps) : JSX.Element {
 
   const {isPremium, previewImage, price, type, title, id} = place;
+
   return (
     <article className="near-places__card place-card">
       { isPremium && <div className="place-card__mark"><span>Premium</span></div>}
@@ -32,7 +32,7 @@ export function NearPlace ({place}: NearPlaceProps) : JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#todo">{title}</a>
+          <Link to={generatePath(AppRoute.Property, { id : String(id) })}>{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>

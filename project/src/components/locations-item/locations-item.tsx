@@ -4,7 +4,6 @@ import { changeActiveCity } from '../../store/city-process/city-process';
 import { getActiveCity } from '../../store/city-process/selector';
 import { OfferCity } from '../../types/offers-list';
 
-
 type LocationsItemProp = {
     city: OfferCity;
     id: number;
@@ -17,9 +16,9 @@ export function LocationsItem ({city, id} : LocationsItemProp) : JSX.Element {
 
   return (
     <li className="locations__item">
-      <a onClick={() => dispatch(changeActiveCity({id, city}))} className={`locations__item-link tabs__item ${isActive ? 'tabs__item--active' : ''}`} href={`#${city.name}`}>
+      <div style={{cursor: 'pointer'}} onClick={() => dispatch(changeActiveCity({id, city}))} className={`locations__item-link tabs__item ${isActive ? 'tabs__item--active' : ''}`}>
         <span>{city.name}</span>
-      </a>
+      </div>
     </li>
   );
 }

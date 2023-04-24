@@ -7,14 +7,13 @@ export const CITES = [
   { id: 6, name: 'Dusseldorf'}
 ];
 
-export const RANDOM_CITES = [
+export const CITES_IN_LOGIN_PAGES = [
   'Paris', 'Cologne', 'Brussels' ,'Amsterdam','Hamburg','Dusseldorf'
 ];
 
 export const START_INDEX_RANDOM_CITY = 0;
 
-
-export const CITES_OBJ = [
+export const LOCATION_CITES = [
   { id: 1,
     city: {
       'name': 'Paris',
@@ -84,3 +83,7 @@ export enum NameSpace {
 export const TIMEOUT_SHOW_ERROR = 2000;
 export const MAX_ROOM_FEEDBACKS = 10;
 export const MAX_STARS_IN_REEDBACK = 5;
+export const MIN_IMAGES_IN_ROOM = 0;
+export const MAX_IMAGES_IN_ROOM = 6;
+export const MIN_SYMBOLS = 50;
+export const MAX_SYMBOLS = 300;

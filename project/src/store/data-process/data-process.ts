@@ -15,7 +15,6 @@ const initialState: DataProcess = {
   hasError: false,
 };
 
-
 export const dataProcess = createSlice({
   name: NameSpace.Data,
   initialState,
