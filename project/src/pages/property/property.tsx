@@ -24,9 +24,7 @@ function Property() : JSX.Element {
 
   useEffect(() => {
     ( async ()=> {
-      const data = await store.dispatch(fetchOfferAction(String(id)));
-      await store.dispatch(fetchCommentsAction(String(id)));
-      await store.dispatch(fetchNearOffersAction(String(id)));
+      const [data] = await Promise.all([store.dispatch(fetchOfferAction(String(id))), store.dispatch(fetchCommentsAction(String(id))), store.dispatch(fetchNearOffersAction(String(id)))]);
 
       if(!data.payload) {
         navigate(AppRoute.NotFound);
