@@ -20,14 +20,14 @@ export function Map({city, points, activeCard = null, height = '794px'}: MapLoca
 
   const defaultCustomIcon = L.icon({
     iconUrl: URL_MARKER_DEFAULT,
-    iconSize: [27, 27],
-    iconAnchor: [20, 40],
+    iconSize: [27, 39],
+    iconAnchor: [13.5, 39],
   });
 
   const currentCustomIcon = L.icon({
     iconUrl: URL_MARKER_CURRENT,
-    iconSize: [27, 27],
-    iconAnchor: [20, 40],
+    iconSize: [27, 39],
+    iconAnchor: [13.5, 39],
   });
   useEffect(() => {
     if (map) {

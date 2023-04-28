@@ -113,7 +113,6 @@ export type FormProcess = {
     isFormValid: boolean;
 };
 
-
 export type OffersFilterOptionProp = {
     tabIndex: number;
     name: string;

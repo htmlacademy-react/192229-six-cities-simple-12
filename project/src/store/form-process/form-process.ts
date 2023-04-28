@@ -25,7 +25,7 @@ export const formProcess = createSlice({
     setRoomReview: (state, action : PayloadAction<RoomReview>) => {
       state.roomReview = action.payload;
     },
-    validateCommentForm: (state,action) => {
+    validateCommentForm: (state) => {
       if(state.roomReview.rating !== '' && (state.roomReview.review.length >= MIN_SYMBOLS && state.roomReview.review.length <= MAX_SYMBOLS )) {
         state.isFormValid = true;
       }
