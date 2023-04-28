@@ -1,10 +1,11 @@
 import { Review } from '../../types/offers-list';
+import { getRating } from '../../utils';
 
-export function ReviewItem({comment,date,user}: Review) : JSX.Element {
+export function ReviewItem({comment,date,user,rating}: Review) : JSX.Element {
 
   const { name, avatarUrl} = user;
   const commentDate = new Date(String(date));
-
+  const starsStyle = getRating(rating);
   return (
     <li className="reviews__item">
       <div className="reviews__user user">
@@ -19,7 +20,7 @@ export function ReviewItem({comment,date,user}: Review) : JSX.Element {
         <div className="reviews__rating rating">
           <div className="reviews__stars rating__stars">
 
-            <span style={{width: '80%'}}></span>
+            <span style={{width: `${starsStyle}%`}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
